@@ -8,7 +8,6 @@
     <script src="js/jquery-1.11.3.js" ></script>
     <script src="js/jsPlumb-2.0.4.js" ></script>
     <script src="js/bootstrap.js" ></script>
-    <script src="js/bootstrap.min.js" ></script>
     <script src="js/script1.js" ></script>
     <script src="js/jquery.js" ></script>
     <script src="js/jquery-ui.js" ></script>
@@ -77,9 +76,11 @@
                 </li>
 
                 <li>
-                    <a class="page-scroll" href="#"><i class="glyphicon glyphicon-floppy-disk"></i> Guardar</a>
+                    <a data-toggle="modal" data-target="#saveModal" class="page-scroll" href="#"><i class="glyphicon glyphicon-floppy-disk"></i> Guardar</a>
                 </li>
-
+                 <li>
+                    <a data-toggle="modal" data-target="#loadModal" class="page-scroll" href="#"><i class="glyphicon glyphicon-floppy-disk"></i> Cargar</a>
+                </li>
                 <li>
                     <a class="page-scroll" href="/perfil"><i class="glyphicon glyphicon-user"></i> Perfil</a>
                 </li>
@@ -122,7 +123,7 @@
                     </div>
                 </li>
                 <li>
-                   <div id="objeto6" class="drag">
+                    <div id="objeto6" class="drag">
                     </div>
                 </li>
                 <li>
@@ -164,17 +165,59 @@
 
         <!-- Page Content -->
         <div id="canvas" class="canvas">
-            <div class="container-fluid" >
-                    <div id="page-content-wrapper">
-            <div class="container-fluid">
-                <div class="row">
-
-                </div>
-            </div>
-        </div>
+            <div id="loaded" class="drag">
             </div>
         </div>
         <!-- /#page-content-wrapper -->
+
+  <!-- Modal -->
+  <div class="modal fade" id="saveModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Guardar documento</h4>
+        </div>
+        <div class="modal-body">
+          <input type="text" id="saveDoc" name="file" placeholder="Archivo"><br>
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="btnGuardar" class="btn btn-default" data-dismiss="modal">Guardar</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
+
+  <div class="modal fade" id="loadModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Cargar documento</h4>
+        </div>
+        <div class="modal-body">
+          <input type="text" id="loadDoc" name="file" placeholder="Archivo"><br>
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="btnCargar" class="btn btn-default" data-dismiss="modal">Cargar</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
+
+
 <footer class="footer">
       <div class="container">
         <p class="text-muted"><small>Daw derechos reservados &copy; 2015 </small></p>

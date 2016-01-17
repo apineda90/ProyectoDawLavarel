@@ -1,3 +1,12 @@
+function saveHtml(file, id, type) {
+    var html = document.getElementById(id).innerHTML;
+    var link = document.createElement('a');
+    type = type || 'text/plain';
+    link.setAttribute('download', file);
+    link.setAttribute('href', 'data:' + type + ';charset=utf-8,' + encodeURIComponent(html));
+    link.click(); 
+}
+
 $(document).ready(function() {
 	var rotate=0;
 
@@ -16,24 +25,68 @@ $(document).ready(function() {
 	        function() { $(this).addClass("Hover"); },
 	        function() { $(this).removeClass("Hover"); }
 	    );
-
 	}
+    $("#loaded").hover(
+	        function() { $(this).addClass("Hover"); },
+	        function() { $(this).removeClass("Hover"); }
+	);
+
+	$('#btnGuardar').click(function(){
+		imports = 0;
+		$('.rotate').each(function() {
+		    $(this).attr("id", "imported"+imports);
+		    imports++;
+		});
+		archivo = $('#saveDoc').val();
+		console.log(archivo);
+		if(archivo == ""){
+			archivo = "grafico";
+		}
+		console.log(archivo);
+		
+		saveHtml(archivo+".svg", 'canvas','text/html');
+	});
 
 	//boton se encarga de cargar un archivo SVG
-	$('#btnLoad').click(function(){
+	$('#btnCargar').click(function(){
 		idLoads = idLoad+loads;
-		svg = $('#txtLoad').val(); //obtengo input del usuario
-		$('.canvas').append('<div id="'+idLoads+'"></div>'); //creo el div que envuelve al SVG importado
-		$("#"+idLoads).load(svg, function( response, status, xhr ) {
+		svg = $('#loadDoc').val(); //obtengo input del usuario
+		$('.canvas').load("/"+svg+".svg", function( response, status, xhr ) {
+					for(i=0; i<1000; i++){
+			$('#imported'+i).addClass("drag");
+			$('.drag').draggable({
+				cancel: "",
+	    		containment: 'parent'
+	    	});
+			$('#imported'+i).addClass("hideable");
+			$(".hideable").mousedown(function(e){
+		       	if( e.button == 1 ) { 
+		      		$(this).fadeOut();
+		      		return false; 
+		    	} 
+		    	return true; 
+			}); 
+		}
 		  	if ( status == "error" ) {
 		    	alert("File not found");
-		  	}
-		}); //cargo SVG en el div
+	  		}
+		}); 
+
+		//cargo SVG en el div
+ /*
         $("#"+idLoads).addClass("inline");
+        
         $("#"+idLoads).draggable({ //hago arrastrable al SVG
  			containment: 'canvas'
  		});
-        loads++;
+		$("#"+idLoads).addClass("rotate");
+		$(".rotate").click(function(event) {
+					    if (event.shiftKey) {
+					    	rotate += 90;
+					        $(this).rotate(rotate);
+					    } 
+		});
+        loads = loads + 1;
         $("#"+idLoads).mousedown(function(e){ //SVG desaparece con rueda del mouse
 	       	if( e.button == 1 ) { 
 	      		$(this).fadeOut();
@@ -41,8 +94,9 @@ $(document).ready(function() {
 	    	} 
 	    	return true; 
  		});
+*/
     });
- 	
+
  	//clase drag hace a los elementos arrastrables
   	$('.drag').draggable( {
   		cancel: "",
@@ -57,7 +111,6 @@ $(document).ready(function() {
 	    	console.log(nombre);
 	    	$(nombre).css({"left":pos.left,"top":pos.top});
 	    	$(nombre).removeClass("drag");
-
 	       	//cuando objeto se arrastra
 	        $(nombre).draggable({
 	        	containment: 'parent',
@@ -70,21 +123,22 @@ $(document).ready(function() {
 	        });
 
 	        //objeto desaparece cuando aplasto rueda del mouse
-	        $(nombre).addClass("hide"+objetos);
-	        $(nombre).addClass("rotate");
-	        $(".rotate").click(function(event) {
-			    if (event.shiftKey) {
-			    	rotate += 90;
-			        $(this).rotate(rotate);
-			    } 
-			});
-	    	$(".hide"+objetos).mousedown(function(e){
+	        $(nombre).addClass("hideable");
+        	$(".hideable").mousedown(function(e){
 		       	if( e.button == 1 ) { 
 		      		$(this).fadeOut();
 		      		return false; 
 		    	} 
 		    	return true; 
-		 	}); 
+			}); 
+	        $(nombre).addClass("rotate");
+			$(".rotate").click(function(event) {
+					    if (event.shiftKey) {
+					    	rotate += 90;
+					        $(this).rotate(rotate);
+					    } 
+			});
+	    	
 
 	    }
 	});
@@ -111,6 +165,7 @@ $(document).ready(function() {
 			    );
 							//$("#clone"+objetos).addClass("hideable"+objetos);
 			}
+			
 		}
 	});
 
