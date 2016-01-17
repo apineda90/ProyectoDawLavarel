@@ -1,0 +1,78 @@
+#canvas { 
+	width: 1920px; 
+	height: 1280px; 
+	background: #808080;
+	margin-left: 200px;
+	float: left;
+}
+
+.inline{
+	position:absolute;
+	display: inline-block;
+	overflow: auto;
+}
+
+#palette{
+	width: 200px;
+	height: 1280px;
+	background: #505050;
+        border-style: outset;
+}
+
+#btnLoad{
+	position: absolute;
+	left: 10px;
+	top: 60px;
+}
+
+#txtLoad{
+	position:absolute;
+	left: 10px;
+	top: 10px;
+}
+
+#objeto1 {
+	position: absolute;
+	left: 10px;
+	top: 100px;
+}
+
+#objeto2 {
+	position: absolute;
+	left: 10px;
+	top: 210px;
+}
+
+#objeto3 {
+	position: absolute;
+	left: 10px;
+	top: 320px;
+}
+
+.dragged1 {
+	/*atributos de elemento 1 paleta*/
+}
+
+.dragged2 {
+	/*atributos de elemento 2 paleta*/
+}
+
+.dragged3 {
+	/*atributos de elemento 3 paleta*/
+}
+
+.dragged4 {
+	/*atributos de elemento 4 paleta*/
+}
+
+.dragged5 {
+	/*atributos de elemento 5 paleta*/
+}
+
+.dragged6 {
+	/*atributos de elemento 6 paleta*/
+}
+
+.absolute{
+	position: absolute;
+}

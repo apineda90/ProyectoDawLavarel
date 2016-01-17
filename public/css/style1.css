@@ -1,0 +1,189 @@
+#canvas { 
+	width: 1920px; 
+	height: 1280px; 
+	background: #ffffff;
+	float: left;
+}
+
+.inline {
+	position:absolute;
+	display: inline-block;
+	overflow: auto;
+}
+
+#palette {
+	width: 200px;
+	height: 1280px;
+	background: #505050;
+    border-style: outset;
+}
+
+#btnLoad {
+	position: absolute;
+	left: 10px;
+	top: 60px;
+}
+
+#txtLoad {
+	position:absolute;
+	left: 10px;
+	top: 10px;
+}
+
+.Hover { border: 1px solid #F00; }
+
+#objeto1 {
+	background: #fff;
+	position: absolute;
+	left: 50px;
+	top: 70px;
+}
+
+#objeto2 {
+	background: #fff;
+	position: absolute;
+	left: 50px;
+	top: 485px;
+}
+
+#objeto3 {
+	background: #fff;
+	position: absolute;
+	left: 5px;
+	top: 145px;
+}
+
+#objeto4 {
+	background: #fff;
+	position: absolute;
+	left: 5px;
+	top: 240px;
+}
+
+#objeto5 {
+	background: #fff;
+	position: absolute;
+	left: 5px;
+	top: 430px;
+}
+
+#objeto6 {
+	background: #fff;
+	position: absolute;
+	left: 5px;
+	top: 340px;
+}
+#objeto7 {
+	background: #fff;
+	position: absolute;
+	left: 5px;
+	top: 385px;
+}
+
+#objeto9 {
+	background: #fff;
+	position: absolute;
+	left: 5px;
+	top: 290px;
+}
+
+#objeto11 {
+	background: #fff;
+	position: absolute;
+	left: 5px;
+	top: 190px;
+}
+
+
+#objeto13 {
+	background: #fff;
+	position: absolute;
+	left: 50px;
+	top: 180px;
+}
+
+#objeto12 {
+	background: #fff;
+	position: absolute;
+	left: 50px;
+	top: 290px;
+}
+
+#objeto14 {
+	background: #fff;
+	position: absolute;
+	left: 47px;
+	top: 405px;
+}
+
+.dragged1 {
+	/*atributos de elemento 1 paleta*/
+}
+
+.dragged2 {
+	/*atributos de elemento 2 paleta*/
+}
+
+.dragged3 {
+	/*atributos de elemento 3 paleta*/
+}
+
+.dragged4 {
+	/*atributos de elemento 4 paleta*/
+}
+
+.dragged5 {
+	/*atributos de elemento 5 paleta*/
+}
+
+.dragged6 {
+	/*atributos de elemento 6 paleta*/
+}
+
+.absolute{
+	position: absolute;
+}
+
+#menu-toggle{
+	margin:auto;
+}
+
+
+.pver{
+	display:inline;
+}
+
+.pocultar{
+	display:none;
+}
+
+.documento{
+	display:inline-block;
+	border:5px solid #68b3f6;
+	height:200px;
+	width:200px;
+	background-color: white;
+	margin:40px 20px 20px 40px;
+	background-image: url(../img/docu.jpg);
+
+}
+.documentoc{
+	display:inline-block;
+	border:5px solid #68b3f6;
+	height:200px;
+	width:200px;
+	background-color: white;
+	margin:40px 20px 20px 40px;
+	background-image: url(../img/docuc.jpg);
+
+}
+
+.documento:hover{
+	border:8px solid #eb9316;
+	background-image: url(../img/docutituu.jpg);
+}
+
+.documentoc:hover{
+	border:8px solid #eb9316;
+	background-image: url(../img/docuct.jpg);
+}
