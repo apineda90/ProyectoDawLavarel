@@ -22,7 +22,7 @@ class Usuario extends Model
         return $usuario;
     }
 
-    /*Se retorna el nombre de un usuario.*/
+       /*Se retorna el nombre de un usuario.*/
     public static function getNames($id)
     {
         $usuario = Usuario::getUserbyId($id);
@@ -37,14 +37,15 @@ class Usuario extends Model
             ->first();
         if($usuario)
             return 1;
-        return -1;
+        return 0;
     }
 
 	public static function getIdUser($user){
         $usu = Usuario::where('usuario', $user)
             ->first();
-        return $usu->id;
+        return $usu->idusuario;
     }
     /*Save is also used to update*/
 
 }
+
