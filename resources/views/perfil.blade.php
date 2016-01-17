@@ -62,7 +62,7 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
                 <li><a class="page-scroll" href="/perfil">
-                    Bienvenido, {{$user}}</a></li>
+                    Bienvenido, {{$user[0]}}</a></li>
                 <li>
                 <li>
                     <a class="page-scroll" href="/principal"><i class="glyphicon glyphicon-home"></i> Principal</a>
@@ -98,10 +98,11 @@
     <div id="infousuario" style="display:inline-block;">
         <h4 style="margin-top:40px;text-align:right"><strong> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Información Personal</strong></h4>
         <ul>
-            <li><strong>Nombre:</strong>&nbsp;&nbsp;John Doe</li>
+            <li><strong>Nombres:</strong>&nbsp;&nbsp;{{$user[0]}}</li>
             <li><strong>Edad:</strong>&nbsp;&nbsp;24</li>
-            <li><strong>Usuario:</strong>&nbsp;&nbsp;<em>@jdoe</em></li>
+            <li><strong>Usuario:</strong>&nbsp;&nbsp;<em>@</em><em>{{$user[1]}}</em></li>
             <li><strong>Docs Compartidos:</strong>&nbsp;&nbsp;4</li>
+            <li><strong>Correo:</strong>&nbsp;&nbsp;4</li>
         </ul>
     </div>
 </div>

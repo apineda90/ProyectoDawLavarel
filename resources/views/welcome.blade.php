@@ -164,19 +164,6 @@
                                             autocomplete="on">
                                 </div>
                             </div>
-                            <div class="form-group" >
-                                <label >Nombres:</label>
-                                <div class="input-group">
-
-                                    <input  style="background-color: white"
-                                            type="text"
-                                            title="Nombres y Apellidos"
-                                            placeholder="Nombres y Apellidos"
-                                            name="nombresReg"
-                                            required
-                                            autocomplete="on">
-                                </div>
-                            </div>
 
                             <div class="form-group" >
                                 <label >Correo:</label>

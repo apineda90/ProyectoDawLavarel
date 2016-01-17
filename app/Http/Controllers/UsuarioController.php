@@ -28,6 +28,12 @@ class UsuarioController extends Controller
 
         }
 
+
+        if(Usuario::userExist(strtolower($req->username))==0)
+
+            dd('Existe dentro de Espol, pero no está registrado');
+
+
         if ($contrasenaValida== -1 and $matricula != -1) {
 
             dd('La contraseña es incorrecta');
@@ -41,6 +47,7 @@ class UsuarioController extends Controller
         session_start();
 
         $_SESSION['nameusuario'] = $ncompleto;
+        $_SESSION['usuarioespol']=strtolower($req->username);
 
         return view( 'principal' , [ 'user' => $ncompleto]);
 
@@ -102,7 +109,9 @@ class UsuarioController extends Controller
 
         if(isset($_SESSION['nameusuario'])) {
             $user = $_SESSION['nameusuario'];
-            return view('perfil', ['user' => $user]);
+            $userespol=$_SESSION['usuarioespol'];
+            $infor=array($user,$userespol);
+            return view('perfil', ['user' => $infor]);
         }
         else
             return view ('welcome');
@@ -111,14 +120,39 @@ class UsuarioController extends Controller
 
     public function guardar(Request $req)
     {
-                $usuario = new Usuario;
-                $usuario->nombres =$req->nombresReg;
-                $usuario->email =$req->emailReg;
-                $usuario->password = Crypt::encrypt($req->passwordRegistro);
-                $usuario->usuario = $req->username;
-                $usuario->save();
+        $contrasenaValida = -1;
+        $servicio = new WebService();
+        $matricula = $servicio->consultarCodigo($req->username);
+        $contrasenaValida = $servicio->getAutentication($req->username,$req->passwordRegistro);
 
-        return view("login");
+        if ($matricula == -1) { //Si usuario no existe en espol
+
+            dd('No existe ese usuario registrado en Espol');
+
+        }
+
+
+        if ($contrasenaValida== -1 and $matricula != -1) {
+
+            dd('La contraseña es incorrecta');
+        }
+
+
+        $info = $servicio->getDatosUser($matricula);
+
+        $ncompleto=$info['nombre'];
+
+
+        if(Usuario::userExist(strtolower($req->username))==0 and $contrasenaValida==1) {
+
+            $usuario = new Usuario;
+            $usuario->nombres =$ncompleto;
+            $usuario->email = $req->emailReg;
+            $usuario->usuario = strtolower($req->username);
+            $usuario->save();
+        }
+
+        return view("welcome");
     }
 
 
