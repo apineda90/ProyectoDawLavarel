@@ -159,7 +159,7 @@
                                             pattern="^((?=.*[a-z])(?=.+[A-Z])(?=.+\d).{6,12})$"
                                             required
                                             title="Debe tener al menos un numero y una mayúscula, mínimo 6 caracteres, máximo 12"
-                                            placeholder="Contraseña Diagram-Pol"
+                                            placeholder="Contraseña Espol"
                                             name="passwordRegistro"
                                             autocomplete="on">
                                 </div>
@@ -174,6 +174,22 @@
                                             title="Correo"
                                             placeholder="Correo Electronico"
                                             name="emailReg"
+                                            required
+                                            autocomplete="on">
+                                </div>
+                            </div>
+
+                            <div class="form-group" >
+                                <label >Edad:</label>
+                                <div class="input-group">
+
+                                    <input  style="background-color: white"
+                                            type="text"
+                                            pattern="^\d*$"
+                                            title="Edad"
+                                            placeholder="Edad"
+                                            required
+                                            name="edadReg"
                                             autocomplete="on">
                                 </div>
                             </div>
@@ -249,3 +265,4 @@
 </body>
 
 </html>
+

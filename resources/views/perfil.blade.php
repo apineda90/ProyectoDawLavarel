@@ -97,14 +97,19 @@
     <div id="foto" style="margin-top:25px; margin-left:5px; display:inline-block;"><img style="height:200px; width:200px border-radius:15%; border:5px solid darkslategray " src="img/user.jpg"/></div>
     <div id="infousuario" style="display:inline-block;">
         <h4 style="margin-top:40px;text-align:right"><strong> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Información Personal</strong></h4>
+        <br>
         <ul>
             <li><strong>Nombres:</strong>&nbsp;&nbsp;{{$user[0]}}</li>
-            <li><strong>Edad:</strong>&nbsp;&nbsp;24</li>
+            <li><strong>Edad:</strong>&nbsp;&nbsp;{{$datoUsuario->edad}}</li>
             <li><strong>Usuario:</strong>&nbsp;&nbsp;<em>@</em><em>{{$user[1]}}</em></li>
+            <li><strong>Correo:</strong>&nbsp;&nbsp;{{$datoUsuario->email}}</li>
             <li><strong>Docs Compartidos:</strong>&nbsp;&nbsp;4</li>
-            <li><strong>Correo:</strong>&nbsp;&nbsp;4</li>
         </ul>
+        <button class="btb btn-primary" style="margin-left:9%; display:block" type="button">Editar</button>
+
     </div>
+    <br><br>
+
 </div>
 <div class="container">
     <div class="row">
@@ -142,4 +147,5 @@
 </body>
 
 </html>
+
 

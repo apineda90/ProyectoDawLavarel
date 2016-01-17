@@ -95,7 +95,8 @@ class UsuarioController extends Controller
     {
         session_start();
 
-        if(isset($_SESSION['nameusuario'])) {
+        if(isset($_SESSION['nameusuario']))
+        {
             $user = $_SESSION['nameusuario'];
             return view('principal', ['user' => $user]);
         }
@@ -110,8 +111,13 @@ class UsuarioController extends Controller
         if(isset($_SESSION['nameusuario'])) {
             $user = $_SESSION['nameusuario'];
             $userespol=$_SESSION['usuarioespol'];
+
+            $id=Usuario::getIdUser($userespol);
+
+            $DatoUsuarioBase=Usuario::getUserbyId($id);
+
             $infor=array($user,$userespol);
-            return view('perfil', ['user' => $infor]);
+            return view('perfil', ['user' => $infor,'datoUsuario' => $DatoUsuarioBase]);
         }
         else
             return view ('welcome');
@@ -149,6 +155,7 @@ class UsuarioController extends Controller
             $usuario->nombres =$ncompleto;
             $usuario->email = $req->emailReg;
             $usuario->usuario = strtolower($req->username);
+            $usuario->edad=$req->edadReg;
             $usuario->save();
         }
 
@@ -162,3 +169,4 @@ class UsuarioController extends Controller
 
 
 }
+

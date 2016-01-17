@@ -43,8 +43,9 @@ class Usuario extends Model
 	public static function getIdUser($user){
         $usu = Usuario::where('usuario', $user)
             ->first();
-        return $usu->id;
+        return $usu->idusuario;
     }
     /*Save is also used to update*/
 
 }
+
