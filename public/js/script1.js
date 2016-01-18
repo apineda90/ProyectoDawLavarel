@@ -52,13 +52,28 @@ $(document).ready(function() {
 		idLoads = idLoad+loads;
 		svg = $('#loadDoc').val(); //obtengo input del usuario
 		$('.canvas').load("/"+svg+".svg", function( response, status, xhr ) {
-					for(i=0; i<1000; i++){
-			$('#imported'+i).addClass("drag");
-			$('.drag').draggable({
-				cancel: "",
-	    		containment: 'parent'
-	    	});
-			$('#imported'+i).addClass("hideable");
+			for(i=0; i<1000; i++){
+				$('#imported'+i).addClass("drag");
+				$('.drag').draggable({
+					cancel: "",
+		    		containment: 'parent'
+		    	});
+				$('#imported'+i).addClass("hideable");
+				$('#imported'+i).addClass("rotate");
+				$('#imported'+i).hover(
+			        function() { $(this).addClass("Hover"); },
+			        function() { $(this).removeClass("Hover"); }
+			    );
+			}
+		  	if ( status == "error" ) {
+		    	alert("File not found");
+	  		}
+		  	$(".rotate").click(function(event) {
+				    if (event.shiftKey) {
+				    	rotate += 90;
+				        $(this).rotate(rotate);
+				    } 
+				});
 			$(".hideable").mousedown(function(e){
 		       	if( e.button == 1 ) { 
 		      		$(this).fadeOut();
@@ -66,10 +81,6 @@ $(document).ready(function() {
 		    	} 
 		    	return true; 
 			}); 
-		}
-		  	if ( status == "error" ) {
-		    	alert("File not found");
-	  		}
 		}); 
 
 		//cargo SVG en el div
@@ -123,23 +134,21 @@ $(document).ready(function() {
 	        });
 
 	        //objeto desaparece cuando aplasto rueda del mouse
-	        $(nombre).addClass("hideable");
-        	$(".hideable").mousedown(function(e){
+	        $(nombre).addClass("hideable"); 
+	        $(nombre).addClass("rotate");
+        	$(".rotate").click(function(event) {
+			    if (event.shiftKey) {
+			    	rotate += 90;
+			        $(this).rotate(rotate);
+			    } 
+			});
+			$(".hideable").mousedown(function(e){
 		       	if( e.button == 1 ) { 
 		      		$(this).fadeOut();
 		      		return false; 
 		    	} 
 		    	return true; 
 			}); 
-	        $(nombre).addClass("rotate");
-			$(".rotate").click(function(event) {
-					    if (event.shiftKey) {
-					    	rotate += 90;
-					        $(this).rotate(rotate);
-					    } 
-			});
-	    	
-
 	    }
 	});
 
