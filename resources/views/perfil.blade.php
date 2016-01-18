@@ -10,7 +10,7 @@
     <script src="js/bootstrap.js" ></script>
     <script src="js/bootstrap.min.js" ></script>
     <script src="js/script1.js" ></script>
-    <script src="js/jquery.js" ></script>
+    <script src="js/jquery.js" ></script>  
     <script src="js/jquery-ui.js" ></script>
     <script src="js/jquery-ui.min.js" ></script>
     <link rel="stylesheet" href="css/style1.css"/>
@@ -24,9 +24,7 @@
     </script>
     <title>Perfil - DiagramPOl</title>
 
-    <!-- Bootstrap Core CSS -->
-
-    <!-- Custom CSS -->
+   
 
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
