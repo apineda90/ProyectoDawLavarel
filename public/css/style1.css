@@ -8,7 +8,10 @@
 .inline {
 	position:absolute;
 	display: inline-block;
+	min-height: 100px;
 	overflow: auto;
+	left: 300px;
+	top: 75px;
 }
 
 #palette {
@@ -114,30 +117,6 @@
 	position: absolute;
 	left: 47px;
 	top: 405px;
-}
-
-.dragged1 {
-	/*atributos de elemento 1 paleta*/
-}
-
-.dragged2 {
-	/*atributos de elemento 2 paleta*/
-}
-
-.dragged3 {
-	/*atributos de elemento 3 paleta*/
-}
-
-.dragged4 {
-	/*atributos de elemento 4 paleta*/
-}
-
-.dragged5 {
-	/*atributos de elemento 5 paleta*/
-}
-
-.dragged6 {
-	/*atributos de elemento 6 paleta*/
 }
 
 .absolute{
