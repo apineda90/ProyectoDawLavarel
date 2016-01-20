@@ -15,6 +15,10 @@ class Usuario extends Model
     /*??*/
     protected $hidden = ['contrasena', 'remember_token'];
 
+    public function documentos(){
+        return $this->hasMany('Documento');
+    }
+
     public static function getUserbyId($id)
     {
         $usuario = Usuario::where('idusuario', $id)
