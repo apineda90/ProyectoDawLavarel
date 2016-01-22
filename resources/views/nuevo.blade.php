@@ -179,7 +179,7 @@
           <h4 class="modal-title">Guardar documento</h4>
         </div>
         <div class="modal-body">
-          <input type="text" id="saveDoc" name="file" placeholder="Archivo"><br>
+          <input type="text" id="saveDoc" name="fileToSave" placeholder="Nombre del archivo a guardar"><br>
         </div>
         <div class="modal-footer">
           <button type="button" id="btnGuardar" class="btn btn-default" data-dismiss="modal">Guardar</button>
@@ -202,7 +202,7 @@
           <h4 class="modal-title">Cargar documento</h4>
         </div>
         <div class="modal-body">
-          <input type="text" id="loadDoc" name="file" placeholder="Archivo"><br>
+          <input type="text" id="loadDoc" name="fileToLoad" placeholder="Archivo a cargar"><br>
         </div>
         <div class="modal-footer">
           <button type="button" id="btnCargar" class="btn btn-default" data-dismiss="modal">Cargar</button>
