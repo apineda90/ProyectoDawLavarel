@@ -165,8 +165,6 @@
 
         <!-- Page Content -->
         <div id="canvas" class="canvas">
-            <div id="loaded" class="drag">
-            </div>
         </div>
         <!-- /#page-content-wrapper -->
 
