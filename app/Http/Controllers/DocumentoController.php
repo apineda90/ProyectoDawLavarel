@@ -34,21 +34,28 @@ class DocumentoController extends Controller {
         return -1;
     }
 
-    public static function crearDoc(Request $req){ //si datos vienen de una vista (form) usas una variable de tipo Request, hay q poner tipo de dato
-        
+    public static function crearDoc(Request $req){
+        error_log("WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW");
+
         session_start();
         $userespol=$_SESSION['usuarioespol'];
         $id=Usuario::getIdUser($userespol);
-        $date = new DateTime;
-
+        
+        $titulo = $req->fileToSave;
+        $innerhtml = $req->getHTML;
+        $date = date('Y/m/d H:i:s');
+    
         $documento = new Documento;
-        $documento->idusuario = $id;
-        $documento->titulo = $req->fileToSave;  //Aqui debe seguir el patron = tabla->campo=$req->(nombre del input o elemento html)
-        $documento->grafico = $req->grafico;    //tambien se puede poner tabla->campo=cualquir cosa
-        $documento->fechaCreacion = $date->format('m-d-y H:i:s');
-        $documento->fechaModif = $date->format('m-d-y H:i:s');
+        $documento->idusuario = 3;
+        $documento->titulo = $titulo;  
+        $documento->grafico = $innerhtml;   
+        $documento->fechaCreacion = $date;
+        $documento->fechaModif = $date;
+
         $documento->save();
+        
     }
+
 
     public static function modificarDoc(Request $req, $id){
         $date = new DateTime;
@@ -61,7 +68,6 @@ class DocumentoController extends Controller {
     }
 
     public function eliminarDoc($id){
-        //Documento::where('idDocumento', $req->idDocumento)->delete(); es valido cuando req es un objeto
         Documento::where('idDocumento', $id)->delete();
     }
 

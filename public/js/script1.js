@@ -1,3 +1,4 @@
+// funcion para exportar el contenido html (para el canvas)
 function saveHtml(file, id, type) {
     var html = document.getElementById(id).innerHTML;
     var link = document.createElement('a');
@@ -8,11 +9,8 @@ function saveHtml(file, id, type) {
 }
 
 $(document).ready(function() {
-	var rotate=0;
-
-	objetos = 0; //numero de objetos arrastrables de paleta
-	loads = 0; //numero de cargas de archivo SVG
-	idLoad = "import"; //se usa para generar un ID para los objetos SVG
+	var rotate=0; // variable para rotar los objetos con shift+click
+	objetos = 0; // contados de objetos arrastrados al canvas (desde la paleta)
 
 	var i=0;
 	for (i=0; i<=13; i++){
@@ -31,9 +29,11 @@ $(document).ready(function() {
 	        function() { $(this).removeClass("Hover"); }
 	);
 
+    // descargo un archivo con el contenido del canvas
 	$('#btnGuardar').click(function(){
 		imports = 0;
 		$('.rotate').each(function() {
+			// asigno un nuevo id a los objetos guardados (evitar tener mismo id que los de paleta)
 		    $(this).attr("id", "imported"+imports);
 		    imports++;
 		});
@@ -47,11 +47,18 @@ $(document).ready(function() {
 		saveHtml(archivo+".svg", 'canvas','text/html');
 	});
 
-	//boton se encarga de cargar un archivo SVG
+	// guardo el html del canvas en un input
+	$('#htmlListo').click(function(){ 
+		$('#HTMLCanvas').val($('#canvas').html());
+		console.log($('#HTMLCanvas').val());
+		console.log("HTML CARGADO");
+	});
+
+	//boton se encarga de cargar en el canvas
 	$('#btnCargar').click(function(){
-		idLoads = idLoad+loads;
 		svg = $('#loadDoc').val(); //obtengo input del usuario
 		$('.canvas').load("/"+svg+".svg", function( response, status, xhr ) {
+			// asigno las clases para arrastrar, esconder, rotar y hover a los objetos importados
 			for(i=0; i<1000; i++){
 				$('#imported'+i).addClass("drag");
 				$('.drag').draggable({
@@ -82,30 +89,6 @@ $(document).ready(function() {
 		    	return true; 
 			}); 
 		}); 
-
-		//cargo SVG en el div
- /*
-        $("#"+idLoads).addClass("inline");
-        
-        $("#"+idLoads).draggable({ //hago arrastrable al SVG
- 			containment: 'canvas'
- 		});
-		$("#"+idLoads).addClass("rotate");
-		$(".rotate").click(function(event) {
-					    if (event.shiftKey) {
-					    	rotate += 90;
-					        $(this).rotate(rotate);
-					    } 
-		});
-        loads = loads + 1;
-        $("#"+idLoads).mousedown(function(e){ //SVG desaparece con rueda del mouse
-	       	if( e.button == 1 ) { 
-	      		$(this).fadeOut();
-	      		return false;
-	    	} 
-	    	return true; 
- 		});
-*/
     });
 
  	//clase drag hace a los elementos arrastrables
@@ -132,7 +115,6 @@ $(document).ready(function() {
 	                console.log(pos.top)
 	            }
 	        });
-
 	        //objeto desaparece cuando aplasto rueda del mouse
 	        $(nombre).addClass("hideable"); 
 	        $(nombre).addClass("rotate");
@@ -172,12 +154,7 @@ $(document).ready(function() {
 			        function() { $(this).addClass("Hover"); },
 			        function() { $(this).removeClass("Hover"); }
 			    );
-							//$("#clone"+objetos).addClass("hideable"+objetos);
 			}
-			
 		}
 	});
-
-
-}); 	
- 
+});

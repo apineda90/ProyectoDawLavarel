@@ -32,6 +32,8 @@ Route::get('perfil','UsuarioController@indexPerfil');
 Route::get('logout','UsuarioController@logout');
 
 Route::post('registro','UsuarioController@guardar');
+
+Route::post('newDoc', 'DocumentoController@crearDoc');
 /*
 |--------------------------------------------------------------------------
 | Application Routes

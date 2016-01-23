@@ -76,7 +76,7 @@
                 </li>
 
                 <li>
-                    <a data-toggle="modal" data-target="#saveModal" class="page-scroll" href="#"><i class="glyphicon glyphicon-floppy-disk"></i> Guardar</a>
+                    <a data-toggle="modal" id="htmlListo" data-target="#saveModal" class="page-scroll" href="#"><i class="glyphicon glyphicon-floppy-disk"></i> Guardar</a>
                 </li>
                  <li>
                     <a data-toggle="modal" data-target="#loadModal" class="page-scroll" href="#"><i class="glyphicon glyphicon-floppy-disk"></i> Cargar</a>
@@ -174,17 +174,24 @@
     
       <!-- Modal content-->
       <div class="modal-content">
+   
         <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Guardar documento</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Guardar documento</h4>
         </div>
         <div class="modal-body">
-          <input type="text" id="saveDoc" name="fileToSave" placeholder="Nombre del archivo a guardar"><br>
+             <form name="formSaveDoc" method="post" action="/newDoc">
+                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                <input type="hidden" id="HTMLCanvas" name="getHTML">
+                <b>  Nombre del documento</b><br>
+                <input type="text" id="saveDoc" name="fileToSave"><br><br>
+                <button type="submit" id="btnGuardar" class="btn btn-default" data-dismiss="modal">Guardar</button>
+             </form>  
         </div>
-        <div class="modal-footer">
-          <button type="button" id="btnGuardar" class="btn btn-default" data-dismiss="modal">Guardar</button>
-          <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+        <div class="modal-footer"> 
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
         </div>
+        
       </div>
       
     </div>
