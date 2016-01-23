@@ -24,19 +24,25 @@ class UsuarioController extends Controller
 
         if ($matricula == -1) { //Si usuario no existe en espol
 
-            dd('No existe ese usuario registrado en Espol');
+            //dd('No existe ese usuario registrado en Espol');
+            $mensajeError='No existe ese usuario registrado en Espol';
+            return view('error',['error'=>$mensajeError]);
 
         }
 
 
-        if(Usuario::userExist(strtolower($req->username))==0)
+        if(Usuario::userExist(strtolower($req->username))==0) {
+            //dd('Existe dentro de Espol, pero no está registrado');
+            $mensajeError = 'El usuario existe en Espol, pero no está registrado';
+            return view('error', ['error' => $mensajeError]);
 
-            dd('Existe dentro de Espol, pero no está registrado');
-
+        }
 
         if ($contrasenaValida== -1 and $matricula != -1) {
 
-            dd('La contraseña es incorrecta');
+            //dd('La contraseña es incorrecta');
+            $mensajeError='Contraseña Incorrecta :v';
+            return view('error',['error'=>$mensajeError]);
         }
 
 

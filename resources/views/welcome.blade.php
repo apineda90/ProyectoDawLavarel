@@ -79,7 +79,7 @@
                 <p>Una nueva herramienta modeladora de tipo colaborativa, para ti!</p>
 
                 <form action="/login" method="post">
-		<meta name="csrf-token" content="{{ csrf_token() }}">
+		            <meta name="csrf-token" content="{{ csrf_token() }}">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <div class="form-group" align="center">
                         <label>Usuario:</label>
