@@ -52,15 +52,19 @@ class DocumentoController extends Controller {
         $titulo = $req->fileToSave;
         $innerhtml = $req->getHTML;
         $date = date('Y/m/d H:i:s');
-    
-        $documento = new Documento;
-        $documento->owner = 2;
-        $documento->titulo = $titulo;  
-        $documento->grafico = $innerhtml;   
-        $documento->fechaCreacion = $date;
-        $documento->fechaModif = $date;
 
-        $documento->save();
+        if(Documento::docuExist($titulo,$id)==0) {
+            $documento = new Documento;
+            $documento->owner = $id;
+            $documento->titulo = $titulo;
+            $documento->grafico = $innerhtml;
+            $documento->fechaCreacion = $date;
+            $documento->fechaModif = $date;
+
+            $documento->save();
+        }
+        else
+            dd('Ya tiene un documento con ese nombre');
         //return Redirect::back()->withMessage('Documento guardado');
         return view('nuevo', ['user'=>$user]);
     }
@@ -72,7 +76,7 @@ class DocumentoController extends Controller {
         $user=$_SESSION['nameusuario'];
         $id=Usuario::getIdUser($userespol);
 
-        $documento = Documento::where('owner', 2)->where('titulo', $req->fileToLoad)->first();
+        $documento = Documento::where('owner', $id)->where('titulo', $req->fileToLoad)->first();
 
        //return Redirect::back()->withMessage('Documento cargado')->with('doc', $documento);
         return view('nuevo', ['doc' => $documento,'user'=>$user]);

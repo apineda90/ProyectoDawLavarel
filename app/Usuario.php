@@ -30,7 +30,7 @@ class Usuario extends Model
     public static function getNames($id)
     {
         $usuario = Usuario::getUserbyId($id);
-        if($usuario)
+        if(isset($usuario))
             return $usuario->nombres;
         return -1;
     }

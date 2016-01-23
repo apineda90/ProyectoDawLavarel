@@ -13,7 +13,16 @@ class Documento extends Model
 
     protected $primaryKey = 'idDocumento';
 
-    protected $fillable = ['idusuario', 'titulo','grafico', 'fechaCreacion', 'fechaModif'];
+    protected $fillable = ['owner', 'titulo','grafico','shared', 'fechaCreacion', 'fechaModif',];
+
+    public static function docuExist($titulodocu,$id)
+    {
+        $documento = Documento::where('titulo', $titulodocu)->where('owner',$id)
+            ->first();
+        if(isset($documento))
+            return 1;
+        return 0;
+    }
 
     function usuario(){
         return $this->belongsTo('Usuario', 'idusuario', 'idusuario');
