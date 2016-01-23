@@ -46,6 +46,7 @@ class DocumentoController extends Controller {
 
         session_start();
         $userespol=$_SESSION['usuarioespol'];
+        $user=$_SESSION['nameusuario'];
         $id=Usuario::getIdUser($userespol);
         
         $titulo = $req->fileToSave;
@@ -60,18 +61,21 @@ class DocumentoController extends Controller {
         $documento->fechaModif = $date;
 
         $documento->save();
-        return Redirect::back()->withMessage('Documento guardado');
+        //return Redirect::back()->withMessage('Documento guardado');
+        return view('nuevo', ['user'=>$user]);
     }
 
     public static function cargarDoc(Request $req){
 
         session_start();
         $userespol=$_SESSION['usuarioespol'];
+        $user=$_SESSION['nameusuario'];
         $id=Usuario::getIdUser($userespol);
-        
-        $documento = Documento::where('idusuario', $id)->where('titulo', $req->fileToLoad);
-        
-        return Redirect::back()->withMessage('Documento cargado')->with("doc", $documento);
+
+        $documento = Documento::where('idusuario', 3)->where('titulo', $req->fileToLoad)->first();
+
+       //return Redirect::back()->withMessage('Documento cargado')->with('doc', $documento);
+        return view('nuevo', ['doc' => $documento,'user'=>$user]);
     }
 
 
