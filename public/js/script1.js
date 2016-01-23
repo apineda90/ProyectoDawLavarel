@@ -9,33 +9,6 @@ function saveHtml(file, id, type) {
 }
 
 $(document).ready(function() {
-	for(i=0; i<1000; i++){
-		$('#imported'+i).addClass("dragImport");
-		$('.dragImport').draggable({
-			cancel: "",
-    		containment: 'parent'
-    	});
-		$('#imported'+i).addClass("hideable");
-		$('#imported'+i).addClass("rotate");
-		$('#imported'+i).hover(
-	        function() { $(this).addClass("Hover"); },
-	        function() { $(this).removeClass("Hover"); }
-	    );
-
-	  	$(".rotate").click(function(event) {
-			    if (event.shiftKey) {
-			    	rotate += 90;
-			        $(this).rotate(rotate);
-			    } 
-			});
-		$(".hideable").mousedown(function(e){
-	       	if( e.button == 1 ) { 
-	      		$(this).fadeOut();
-	      		return false; 
-	    	} 
-	    	return true; 
-		}); 
-	}
 	var rotate=0; // variable para rotar los objetos con shift+click
 	objetos = 0; // contados de objetos arrastrados al canvas (desde la paleta)
 
@@ -62,11 +35,14 @@ $(document).ready(function() {
 		$('.rotate').each(function() {
 			// asigno un nuevo id a los objetos guardados (evitar tener mismo id que los de paleta)
 		    $(this).attr("id", "imported"+imports);
+		    $(this).addClass("import");
 		    imports++;
 		});
 		$('#HTMLCanvas').val($('#canvas').html());
 
 	});
+
+
 
 	//boton se encarga de cargar en el canvas
 	$('#btnCargar').click(function(){
@@ -139,31 +115,31 @@ $(document).ready(function() {
 			}
 		}
 	});
-	for(i=0; i<1000; i++){
-		$('#imported'+i).addClass("dragImport");
-		$('.dragImport').draggable({
-			cancel: "",
-    		containment: 'parent'
-    	});
-		$('#imported'+i).addClass("hideable");
-		$('#imported'+i).addClass("rotate");
-		$('#imported'+i).hover(
-	        function() { $(this).addClass("Hover"); },
-	        function() { $(this).removeClass("Hover"); }
-	    );
 
-	  	$(".rotate").click(function(event) {
-			    if (event.shiftKey) {
-			    	rotate += 90;
-			        $(this).rotate(rotate);
-			    } 
-			});
-		$(".hideable").mousedown(function(e){
-	       	if( e.button == 1 ) { 
-	      		$(this).fadeOut();
-	      		return false; 
-	    	} 
-	    	return true; 
-		}); 
-	}
+	$('.import').addClass("dragImport");
+	$('.dragImport').draggable({
+		cancel: "",
+		containment: 'parent'
+	});
+	$('.import').addClass("hideableImport");
+	$('.import').addClass("rotateImport");
+	$('.import').hover(
+        function() { $(this).addClass("Hover"); },
+        function() { $(this).removeClass("Hover"); }
+    );
+
+  	$(".rotateImport").click(function(event) {
+		    if (event.shiftKey) {
+		    	rotate += 90;
+		        $(this).rotate(rotate);
+		    } 
+		});
+	$(".hideableImport").mousedown(function(e){
+       	if( e.button == 1 ) { 
+      		$(this).fadeOut();
+      		return false; 
+    	} 
+    	return true; 
+	}); 
+	
 });
