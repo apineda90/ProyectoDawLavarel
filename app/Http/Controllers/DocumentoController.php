@@ -35,7 +35,7 @@ class DocumentoController extends Controller {
     }
 
     public static function crearDoc(Request $req){
-        error_log("WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW");
+        dd('jggly');
 
         session_start();
         $userespol=$_SESSION['usuarioespol'];

@@ -180,13 +180,13 @@
             <h4 class="modal-title">Guardar documento</h4>
         </div>
         <div class="modal-body">
-             <form name="formSaveDoc" method="post" action="/newDoc">
+             <form name="formSaveDoc" action="/newDoc" method="post">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <input type="hidden" id="HTMLCanvas" name="getHTML">
                 <b>  Nombre del documento</b><br>
                 <input type="text" id="saveDoc" name="fileToSave"><br><br>
-                <button type="submit" id="btnGuardar" class="btn btn-default" data-dismiss="modal">Guardar</button>
-             </form>  
+                <button type="submit" id="btnGuardar" class="btn btn-default">Guardar</button>
+             </form>
         </div>
         <div class="modal-footer"> 
             <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
