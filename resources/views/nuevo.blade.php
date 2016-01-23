@@ -185,7 +185,7 @@
                 <input type="hidden" id="HTMLCanvas" name="getHTML">
                 <b>  Nombre del documento</b><br>
                 <input type="text" id="saveDoc" name="fileToSave"><br><br>
-                <button type="submit" id="btnGuardar" class="btn btn-default">Guardar</button>
+                <button type="submit" class="btn btn-default">Guardar</button>
              </form>
         </div>
         <div class="modal-footer"> 

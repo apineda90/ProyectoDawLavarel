@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Http\Request;
 use App\Documento;
 use App\Usuario; // Si se va a usar funciones de otro modelo se lo incluye aqui
@@ -35,7 +35,6 @@ class DocumentoController extends Controller {
     }
 
     public static function crearDoc(Request $req){
-        dd('jggly');
 
         session_start();
         $userespol=$_SESSION['usuarioespol'];
@@ -53,7 +52,7 @@ class DocumentoController extends Controller {
         $documento->fechaModif = $date;
 
         $documento->save();
-        
+        return Redirect::back()->withMessage('Documento guardado');
     }
 
 
