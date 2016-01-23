@@ -191,7 +191,7 @@
                 <input type="hidden" id="HTMLCanvas" name="getHTML">
                 <b>  Nombre del documento</b><br>
                 <input type="text" id="saveDoc" name="fileToSave"><br><br>
-                <button type="submit" class="btn btn-default">Guardar</button>
+                <button type="submit" class="btn btn-default" id="btnGuardar">Guardar</button>
              </form>
         </div>
         <div class="modal-footer"> 
@@ -219,12 +219,12 @@
             <form name="formLoadDoc" action="/loadDocum" method="post">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">  
           <input type="text" id="loadDoc" name="fileToLoad" placeholder="Archivo a cargar"><br><br>
-          <button type="submit" class="btn btn-default">Cargar</button>
+          <button type="submit" id="btnCargar" class="btn btn-default">Cargar</button>
           <form>
         </div>
         <div class="modal-footer">
           
-          <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal" data-target="#loadModal">Cancelar</button>
         </div>
       </div>
       
@@ -233,6 +233,29 @@
   
 </div>
 
+<div class="modal fade" id="confirmLoad" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+   
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Guardar documento</h4>
+        </div>
+        <div class="modal-body">
+                <b>  Documento cargado</b><br>
+        </div>
+        <div class="modal-footer"> 
+            <button type="button" class="btn btn-default" data-dismiss="modal" id="okLoad">OK</button>
+        </div>
+        
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
 
 <footer class="footer">
       <div class="container">

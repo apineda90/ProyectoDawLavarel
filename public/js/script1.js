@@ -9,6 +9,33 @@ function saveHtml(file, id, type) {
 }
 
 $(document).ready(function() {
+	for(i=0; i<1000; i++){
+		$('#imported'+i).addClass("dragImport");
+		$('.dragImport').draggable({
+			cancel: "",
+    		containment: 'parent'
+    	});
+		$('#imported'+i).addClass("hideable");
+		$('#imported'+i).addClass("rotate");
+		$('#imported'+i).hover(
+	        function() { $(this).addClass("Hover"); },
+	        function() { $(this).removeClass("Hover"); }
+	    );
+
+	  	$(".rotate").click(function(event) {
+			    if (event.shiftKey) {
+			    	rotate += 90;
+			        $(this).rotate(rotate);
+			    } 
+			});
+		$(".hideable").mousedown(function(e){
+	       	if( e.button == 1 ) { 
+	      		$(this).fadeOut();
+	      		return false; 
+	    	} 
+	    	return true; 
+		}); 
+	}
 	var rotate=0; // variable para rotar los objetos con shift+click
 	objetos = 0; // contados de objetos arrastrados al canvas (desde la paleta)
 
@@ -29,67 +56,22 @@ $(document).ready(function() {
 	        function() { $(this).removeClass("Hover"); }
 	);
 
-    // descargo un archivo con el contenido del canvas
-	$('#btnGuardar').click(function(){
+	// guardo el html del canvas en un input
+	$('#htmlListo').click(function(){ 
 		imports = 0;
 		$('.rotate').each(function() {
 			// asigno un nuevo id a los objetos guardados (evitar tener mismo id que los de paleta)
 		    $(this).attr("id", "imported"+imports);
 		    imports++;
 		});
-		archivo = $('#saveDoc').val();
-		console.log(archivo);
-		if(archivo == ""){
-			archivo = "grafico";
-		}
-		console.log(archivo);
-		
-		saveHtml(archivo+".svg", 'canvas','text/html');
-	});
-
-	// guardo el html del canvas en un input
-	$('#htmlListo').click(function(){ 
 		$('#HTMLCanvas').val($('#canvas').html());
-		console.log($('#HTMLCanvas').val());
-		console.log("HTML CARGADO");
+
 	});
 
 	//boton se encarga de cargar en el canvas
 	$('#btnCargar').click(function(){
-		svg = $('#loadDoc').val(); //obtengo input del usuario
-		$('.canvas').load("/"+svg+".svg", function( response, status, xhr ) {
-			// asigno las clases para arrastrar, esconder, rotar y hover a los objetos importados
-			for(i=0; i<1000; i++){
-				$('#imported'+i).addClass("drag");
-				$('.drag').draggable({
-					cancel: "",
-		    		containment: 'parent'
-		    	});
-				$('#imported'+i).addClass("hideable");
-				$('#imported'+i).addClass("rotate");
-				$('#imported'+i).hover(
-			        function() { $(this).addClass("Hover"); },
-			        function() { $(this).removeClass("Hover"); }
-			    );
-			}
-		  	if ( status == "error" ) {
-		    	alert("File not found");
-	  		}
-		  	$(".rotate").click(function(event) {
-				    if (event.shiftKey) {
-				    	rotate += 90;
-				        $(this).rotate(rotate);
-				    } 
-				});
-			$(".hideable").mousedown(function(e){
-		       	if( e.button == 1 ) { 
-		      		$(this).fadeOut();
-		      		return false; 
-		    	} 
-		    	return true; 
-			}); 
-		}); 
-    });
+	
+	}); 
 
  	//clase drag hace a los elementos arrastrables
   	$('.drag').draggable( {
@@ -157,4 +139,31 @@ $(document).ready(function() {
 			}
 		}
 	});
+	for(i=0; i<1000; i++){
+		$('#imported'+i).addClass("dragImport");
+		$('.dragImport').draggable({
+			cancel: "",
+    		containment: 'parent'
+    	});
+		$('#imported'+i).addClass("hideable");
+		$('#imported'+i).addClass("rotate");
+		$('#imported'+i).hover(
+	        function() { $(this).addClass("Hover"); },
+	        function() { $(this).removeClass("Hover"); }
+	    );
+
+	  	$(".rotate").click(function(event) {
+			    if (event.shiftKey) {
+			    	rotate += 90;
+			        $(this).rotate(rotate);
+			    } 
+			});
+		$(".hideable").mousedown(function(e){
+	       	if( e.button == 1 ) { 
+	      		$(this).fadeOut();
+	      		return false; 
+	    	} 
+	    	return true; 
+		}); 
+	}
 });
