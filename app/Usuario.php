@@ -21,7 +21,7 @@ class Usuario extends Model
 
     public static function getUserbyId($id)
     {
-        $usuario = Usuario::where('idusuario', $id)
+        $usuario = Usuario::where('idUsuario', $id)
             ->first();
         return $usuario;
     }
@@ -47,7 +47,7 @@ class Usuario extends Model
 	public static function getIdUser($user){
         $usu = Usuario::where('usuario', $user)
             ->first();
-        return $usu->idusuario;
+        return $usu->idUsuario;
     }
     /*Save is also used to update*/
 

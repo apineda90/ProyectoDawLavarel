@@ -54,7 +54,7 @@ class DocumentoController extends Controller {
         $date = date('Y/m/d H:i:s');
     
         $documento = new Documento;
-        $documento->idusuario = 3;
+        $documento->owner = 2;
         $documento->titulo = $titulo;  
         $documento->grafico = $innerhtml;   
         $documento->fechaCreacion = $date;
@@ -72,7 +72,7 @@ class DocumentoController extends Controller {
         $user=$_SESSION['nameusuario'];
         $id=Usuario::getIdUser($userespol);
 
-        $documento = Documento::where('idusuario', 3)->where('titulo', $req->fileToLoad)->first();
+        $documento = Documento::where('owner', 2)->where('titulo', $req->fileToLoad)->first();
 
        //return Redirect::back()->withMessage('Documento cargado')->with('doc', $documento);
         return view('nuevo', ['doc' => $documento,'user'=>$user]);

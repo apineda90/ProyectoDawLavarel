@@ -139,14 +139,16 @@ class UsuarioController extends Controller
 
         if ($matricula == -1) { //Si usuario no existe en espol
 
-            dd('No existe ese usuario registrado en Espol');
+            $mensajeError='No existe ese usuario registrado en Espol';
+            return view('error',['error'=>$mensajeError]);
 
         }
 
 
         if ($contrasenaValida== -1 and $matricula != -1) {
 
-            dd('La contraseña es incorrecta');
+            $mensajeError='Contraseña Incorrecta :v';
+            return view('error',['error'=>$mensajeError]);
         }
 
 
