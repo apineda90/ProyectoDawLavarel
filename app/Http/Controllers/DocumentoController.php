@@ -23,7 +23,7 @@ class DocumentoController extends Controller {
     
     public static function getDocsByIdUser($id) {   
         $documentos = Documento::where('idusuario', $id)
-            ->first();
+            ->get();
         return $documentos;
     }
 
@@ -31,6 +31,14 @@ class DocumentoController extends Controller {
         $documento = Documento::getDocById($id);
         if(isset($documento))
             return $documento->titulo;
+        return -1;
+    }
+
+    public static function getDocByTitulo(Request $req){
+        $documento = Documento::where('titulo', $req->fileToLoad)
+            ->first();
+        if(isset($documento))
+            return $documento;
         return -1;
     }
 
@@ -53,6 +61,17 @@ class DocumentoController extends Controller {
 
         $documento->save();
         return Redirect::back()->withMessage('Documento guardado');
+    }
+
+    public static function cargarDoc(Request $req){
+
+        session_start();
+        $userespol=$_SESSION['usuarioespol'];
+        $id=Usuario::getIdUser($userespol);
+        
+        $documento = Documento::where('idusuario', $id)->where('titulo', $req->fileToLoad);
+        
+        return Redirect::back()->withMessage('Documento cargado')->with("doc", $documento);
     }
 
 

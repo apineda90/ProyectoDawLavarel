@@ -164,7 +164,13 @@
         <!-- /#sidebar-wrapper -->
 
         <!-- Page Content -->
-        <div id="canvas" class="canvas">
+        <div id="canvas" class="canvas" name="canvas">
+        <?php
+            if(!empty($doc)){
+               echo $doc->grafico; 
+            }
+            else error_log("jiggly");
+        ?>
         </div>
         <!-- /#page-content-wrapper -->
 
@@ -209,10 +215,15 @@
           <h4 class="modal-title">Cargar documento</h4>
         </div>
         <div class="modal-body">
-          <input type="text" id="loadDoc" name="fileToLoad" placeholder="Archivo a cargar"><br>
+            <b>  Nombre del documento</b><br>
+            <form name="formLoadDoc" action="/loadDocum" method="post">
+            <input type="hidden" name="_token" value="{{ csrf_token() }}">  
+          <input type="text" id="loadDoc" name="fileToLoad" placeholder="Archivo a cargar"><br><br>
+          <button type="submit" class="btn btn-default">Cargar</button>
+          <form>
         </div>
         <div class="modal-footer">
-          <button type="button" id="btnCargar" class="btn btn-default" data-dismiss="modal">Cargar</button>
+          
           <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
         </div>
       </div>
