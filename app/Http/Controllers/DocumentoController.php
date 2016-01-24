@@ -66,14 +66,16 @@ class DocumentoController extends Controller {
             $documento->fechaModif = $date;
 
             $documento->save();
-
+            $_SESSION['documento'] = $documento->idDocumento;
             //return Redirect::back()->withMessage('Documento guardado');
             return view('nuevo', ['doc' => $documento, 'user' => $user, 'title' => $documento->titulo]);
 
         }
 
         else
-            dd('Ya tiene un documento con ese nombre');
+            echo '<script language="javascript">';
+            echo 'alert("Ya existe un documento con el mismo nombre.")';
+            echo '</script>';
         return view('nuevo', ['user' => $user]);
 
     }
