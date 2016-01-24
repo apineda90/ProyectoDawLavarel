@@ -125,7 +125,7 @@ class DocumentoController extends Controller {
         $id=Usuario::getIdUser($userespol);
 
         $documento = Documento::where('owner', $id)->where('titulo', $req->fileToLoad)->first();
-
+        $_SESSION['documento'] = $documento->idDocumento;
         //return Redirect::back()->withMessage('Documento cargado')->with('doc', $documento);
         return view('nuevo', ['doc' => $documento,'user'=>$user ,'title'=>$req->fileToLoad]);
     }
