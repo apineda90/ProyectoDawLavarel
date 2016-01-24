@@ -66,11 +66,16 @@ class DocumentoController extends Controller {
             $documento->fechaModif = $date;
 
             $documento->save();
+
+            //return Redirect::back()->withMessage('Documento guardado');
+            return view('nuevo', ['doc' => $documento, 'user' => $user, 'title' => $documento->titulo]);
+
         }
+
         else
             dd('Ya tiene un documento con ese nombre');
-        //return Redirect::back()->withMessage('Documento guardado');
-        return view('nuevo', ['user'=>$user]);
+        return view('nuevo', ['user' => $user]);
+
     }
 
     public static function cargarDoc(Request $req){
@@ -110,6 +115,19 @@ class DocumentoController extends Controller {
         $documento = Documento::where('idDocumento', $idDocumento)->first();
 
         return view('nuevo', ['doc' => $documento, 'user' => $user, 'title' => $documento->titulo]);
+    }
+
+	public static function cargarDesdePrincipal(Request $req){
+
+        session_start();
+        $userespol=$_SESSION['usuarioespol'];
+        $user=$_SESSION['nameusuario'];
+        $id=Usuario::getIdUser($userespol);
+
+        $documento = Documento::where('owner', $id)->where('titulo', $req->fileToLoad)->first();
+
+        //return Redirect::back()->withMessage('Documento cargado')->with('doc', $documento);
+        return view('nuevo', ['doc' => $documento,'user'=>$user]);
     }
 
     public function eliminarDoc($id){

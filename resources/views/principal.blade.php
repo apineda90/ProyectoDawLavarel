@@ -100,8 +100,11 @@
     <div id="infoprincipal" style="display:inline-block;">
          @forelse ($docs as $grupo)
                 <div class="documento">
+                    <form action="/CargarDocDesdePrincipal" method="get">
                     <p class="tituloDoc"><strong><em>{{$grupo->titulo}}</em></strong></p>
-                    <button type="button" class="btn btn-info" style="margin-left:50px; margin-top: 175px" type="button">Cargar</button>
+                        <input type="hidden" name="fileToLoad" value="{{$grupo->titulo}}">
+                    <button type="submit" class="btn btn-info" style="margin-left:50px; margin-top: 175px" type="button">Cargar</button>
+                    </form>
                 </div>
 
             @empty
