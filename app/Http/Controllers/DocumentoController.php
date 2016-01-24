@@ -127,7 +127,7 @@ class DocumentoController extends Controller {
         $documento = Documento::where('owner', $id)->where('titulo', $req->fileToLoad)->first();
 
         //return Redirect::back()->withMessage('Documento cargado')->with('doc', $documento);
-        return view('nuevo', ['doc' => $documento,'user'=>$user]);
+        return view('nuevo', ['doc' => $documento,'user'=>$user ,'title'=>$req->fileToLoad]);
     }
 
     public function eliminarDoc($id){
