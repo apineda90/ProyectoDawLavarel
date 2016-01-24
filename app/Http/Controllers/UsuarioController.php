@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Documento;
 use Illuminate\Http\Request;
 use App\Usuario;
 
@@ -54,8 +55,10 @@ class UsuarioController extends Controller
 
         $_SESSION['nameusuario'] = $ncompleto;
         $_SESSION['usuarioespol']=strtolower($req->username);
+        $iduser=Usuario::getIdUser($_SESSION['usuarioespol']);
+        $documentos=Documento::ObtenerMisDocus($iduser);
 
-        return view( 'principal' , [ 'user' => $ncompleto]);
+        return view( 'principal' , [ 'user' => $ncompleto,'docs'=>$documentos]);
 
     }
 
@@ -104,7 +107,9 @@ class UsuarioController extends Controller
         if(isset($_SESSION['nameusuario']))
         {
             $user = $_SESSION['nameusuario'];
-            return view('principal', ['user' => $user]);
+            $iduser=Usuario::getIdUser($_SESSION['usuarioespol']);
+            $documentos=Documento::ObtenerMisDocus($iduser);
+            return view('principal', ['user' => $user, 'docs'=>$documentos]);
         }
         else
             return view ('welcome');

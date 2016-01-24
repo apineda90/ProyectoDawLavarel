@@ -24,6 +24,17 @@ class Documento extends Model
         return 0;
     }
 
+    public static function ObtenerMisDocus($id)
+    {
+        $documentos = Documento::where('owner',$id)
+            ->get();
+        if(isset($documentos))
+            return $documentos;
+        return 0;
+    }
+
+
+
     function usuario(){
         return $this->belongsTo('Usuario', 'idusuario', 'idusuario');
     }

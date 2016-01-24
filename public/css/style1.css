@@ -138,13 +138,15 @@
 
 .documento{
 	display:inline-block;
-	border:5px solid #68b3f6;
-	height:200px;
-	width:200px;
-	background-color: white;
-	margin:40px 20px 20px 40px;
-	background-image: url(../img/docu.jpg);
 
+	height:165px;
+	width:165px;
+	margin:55px 25px 35px;
+	border-radius: 20%;
+	position: relative;
+	background-image: url(../img/doc.jpg);
+	background-color:transparent
+    border:1px solid #68b3f6;
 }
 .documentoc{
 	display:inline-block;
@@ -158,11 +160,20 @@
 }
 
 .documento:hover{
-	border:8px solid #eb9316;
-	background-image: url(../img/docutituu.jpg);
+
+
 }
 
 .documentoc:hover{
 	border:8px solid #eb9316;
 	background-image: url(../img/docuct.jpg);
+}
+
+.tituloDoc{
+	position: absolute;
+	top:20px;
+	width: 160px;
+	text-align:center;
+	font-size: 19px;
+	font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
