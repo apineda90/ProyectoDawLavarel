@@ -13,12 +13,14 @@ $(document).ready(function() {
 	objetos = 0; // contados de objetos arrastrados al canvas (desde la paleta)
 
 	var i=0;
+
+	// inicializo la paleta
 	for (i=0; i<=13; i++){
 		$("#objeto"+i).load("svg/"+i+".svg", function( response, status, xhr ) {
 		  	if ( status == "error" ) {
 		    	alert("File not found");
 		  	}
-		}); //cargo SVG en el div
+		});
 	    $("#objeto"+i).hover(
 	        function() { $(this).addClass("Hover"); },
 	        function() { $(this).removeClass("Hover"); }
@@ -40,7 +42,7 @@ $(document).ready(function() {
 		});
 		$('#HTMLCanvas').val($('#canvas').html());
 	});
-
+	// guardo el html del canvas en un input
 	$('#htmlModif').click(function(){ 
 		imports = 0;
 		$('.rotate').each(function() {

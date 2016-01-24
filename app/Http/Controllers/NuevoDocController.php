@@ -23,6 +23,7 @@ class NuevoDocController extends Controller
 
         if(isset($_SESSION['nameusuario'])) {
             $user = $_SESSION['nameusuario'];
+            unset($_SESSION['documento']);
             return view('nuevo', ['user' => $user]);
         }
         else

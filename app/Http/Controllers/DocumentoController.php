@@ -100,21 +100,29 @@ class DocumentoController extends Controller {
         $user=$_SESSION['nameusuario'];
         $id=Usuario::getIdUser($userespol);
 
-        $date = new DateTime;
-        $gye_time = new DateTimeZone('America/Guayaquil');
-        $date->setTimezone($gye_time);
-        $date->format('m-d-y H:i:s');
-        $idDocumento = $_SESSION['documento'];
-        $innerhtml = $req->getHTMLMod;
+        if(isset($_SESSION['documento'])){
+            $date = new DateTime;
+            $gye_time = new DateTimeZone('America/Guayaquil');
+            $date->setTimezone($gye_time);
+            $date->format('m-d-y H:i:s');
+            $idDocumento = $_SESSION['documento'];
+            $innerhtml = $req->getHTMLMod;
 
-        Documento::where('idDocumento', $idDocumento)->first()->update([
-          'grafico' => $innerhtml,
-          'fechaModif' => $date
-        ]);
+            Documento::where('idDocumento', $idDocumento)->first()->update([
+              'grafico' => $innerhtml,
+              'fechaModif' => $date
+            ]);
 
-        $documento = Documento::where('idDocumento', $idDocumento)->first();
-
-        return view('nuevo', ['doc' => $documento, 'user' => $user, 'title' => $documento->titulo]);
+            $documento = Documento::where('idDocumento', $idDocumento)->first();
+            return view('nuevo', ['doc' => $documento, 'user' => $user, 'title' => $documento->titulo]);
+        }
+        else{
+            echo '<script language="javascript">';
+            echo 'alert("No ha creado un documento")';
+            echo '</script>';
+            return view('nuevo', ['user' => $user]);
+        }
+ 
     }
 
 	public static function cargarDesdePrincipal(Request $req){
