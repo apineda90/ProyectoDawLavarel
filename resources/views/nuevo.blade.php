@@ -41,13 +41,16 @@
 </head>
 
 <body>
-
+<?php 
+    if(empty($title)){
+        $title = "Untitled";
+    }
+?>
 <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
 
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
-
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
@@ -63,6 +66,7 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
+            <li><h3 class="page-scroll">Title: {{$title}}</h3></li>
                 <li><a class="page-scroll" href="/perfil">
                         Bienvenido, {{$user}}</a></li>
                 <li>
@@ -76,7 +80,10 @@
                 </li>
 
                 <li>
-                    <a data-toggle="modal" id="htmlListo" data-target="#saveModal" class="page-scroll" href="#"><i class="glyphicon glyphicon-floppy-disk"></i> Guardar</a>
+                    <a data-toggle="modal" id="htmlListo" data-target="#saveModal" class="page-scroll" href="#"><i class="glyphicon glyphicon-floppy-disk"></i> Crear</a>
+                </li>
+                <li>
+                    <a data-toggle="modal" id="htmlModif" data-target="#modifModal" class="page-scroll" href="#"><i class="glyphicon glyphicon-floppy-disk"></i> Guardar</a>
                 </li>
                  <li>
                     <a data-toggle="modal" data-target="#loadModal" class="page-scroll" href="#"><i class="glyphicon glyphicon-floppy-disk"></i> Cargar</a>
@@ -220,7 +227,7 @@
             <input type="hidden" name="_token" value="{{ csrf_token() }}">  
           <input type="text" id="loadDoc" name="fileToLoad" placeholder="Archivo a cargar"><br><br>
           <button type="submit" id="btnCargar" class="btn btn-default">Cargar</button>
-          <form>
+          </form>
         </div>
         <div class="modal-footer">
           
@@ -233,7 +240,7 @@
   
 </div>
 
-<div class="modal fade" id="confirmLoad" role="dialog">
+<div class="modal fade" id="modifModal" role="dialog">
     <div class="modal-dialog">
     
       <!-- Modal content-->
@@ -241,13 +248,19 @@
    
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">Guardar documento</h4>
+            <h4 class="modal-title">Guardar cambios</h4>
         </div>
         <div class="modal-body">
-                <b>  Documento cargado</b><br>
+                <b>  Desea guardar los cambios?</b><br>
         </div>
         <div class="modal-footer"> 
-            <button type="button" class="btn btn-default" data-dismiss="modal" id="okLoad">OK</button>
+            <form name="formModifDoc" action="/modDocum" method="post">
+                <input type="hidden" name="_token" value="{{ csrf_token() }}">  
+                <input type="hidden" id="HTMLCanvasMod" name="getHTMLMod">
+                <button type="submit" class="btn btn-default" id="okModif">OK</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" data-target="#modifModal">Cancelar</button>
+            </form>
+
         </div>
         
       </div>

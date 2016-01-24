@@ -10,7 +10,8 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\WebService\WebService;
-
+use DateTime;
+use DateTimeZone;
 
 
 class DocumentoController extends Controller {
@@ -51,7 +52,10 @@ class DocumentoController extends Controller {
         
         $titulo = $req->fileToSave;
         $innerhtml = $req->getHTML;
-        $date = date('Y/m/d H:i:s');
+        $date = new DateTime;
+        $gye_time = new DateTimeZone('America/Guayaquil');
+        $date->setTimezone($gye_time);
+        $date->format('m-d-y H:i:s');
 
         if(Documento::docuExist($titulo,$id)==0) {
             $documento = new Documento;
@@ -70,31 +74,46 @@ class DocumentoController extends Controller {
     }
 
     public static function cargarDoc(Request $req){
-
         session_start();
+
         $userespol=$_SESSION['usuarioespol'];
         $user=$_SESSION['nameusuario'];
         $id=Usuario::getIdUser($userespol);
 
         $documento = Documento::where('owner', $id)->where('titulo', $req->fileToLoad)->first();
-
-       //return Redirect::back()->withMessage('Documento cargado')->with('doc', $documento);
-        return view('nuevo', ['doc' => $documento,'user'=>$user]);
+        if(!empty($documento)){
+            $_SESSION['documento'] = $documento->idDocumento;
+        }
+        return view('nuevo', ['doc' => $documento, 'user' => $user, 'title' => $documento->titulo]);
     }
 
 
-    public static function modificarDoc(Request $req, $id){
+    public static function modificarDoc(Request $req){
+        session_start();
+
+        $userespol=$_SESSION['usuarioespol'];
+        $user=$_SESSION['nameusuario'];
+        $id=Usuario::getIdUser($userespol);
+
         $date = new DateTime;
-        Documento::where('idDocumento', $id)->update([
-          'titulo' => $req->titulo,
-          'grafico' => $req->grafico,
-          'fechaCreacion' => $req->fechaCreacion,
-          'fechaModif' => $date->format('m-d-y H:i:s')
+        $gye_time = new DateTimeZone('America/Guayaquil');
+        $date->setTimezone($gye_time);
+        $date->format('m-d-y H:i:s');
+        $idDocumento = $_SESSION['documento'];
+        $innerhtml = $req->getHTMLMod;
+
+        Documento::where('idDocumento', $idDocumento)->first()->update([
+          'grafico' => $innerhtml,
+          'fechaModif' => $date
         ]);
+
+        $documento = Documento::where('idDocumento', $idDocumento)->first();
+
+        return view('nuevo', ['doc' => $documento, 'user' => $user, 'title' => $documento->titulo]);
     }
 
     public function eliminarDoc($id){
-        Documento::where('idDocumento', $id)->delete();
+        Documento::where('idDocumento', $id)->first()->delete();
     }
 
 

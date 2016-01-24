@@ -39,15 +39,18 @@ $(document).ready(function() {
 		    imports++;
 		});
 		$('#HTMLCanvas').val($('#canvas').html());
-
 	});
 
-
-
-	//boton se encarga de cargar en el canvas
-	$('#btnCargar').click(function(){
-	
-	}); 
+	$('#htmlModif').click(function(){ 
+		imports = 0;
+		$('.rotate').each(function() {
+			// asigno un nuevo id a los objetos guardados (evitar tener mismo id que los de paleta)
+		    $(this).attr("id", "imported"+imports);
+		    $(this).addClass("import");
+		    imports++;
+		});
+		$('#HTMLCanvasMod').val($('#canvas').html());
+	});
 
  	//clase drag hace a los elementos arrastrables
   	$('.drag').draggable( {
