@@ -35,7 +35,17 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
+<script language="JavaScript" type="text/javascript">
+$(document).ready(function(){
+    $("button.delete").click(function(e){
+        if(!confirm('Eliminar documento?')){
+            e.preventDefault();
+            return false;
+        }
+        return true;
+    });
+});
+</script>
 </head>
 
 <body>
@@ -107,7 +117,7 @@
                     </form>
                     <form action="/BorrarDoc" >
                         <input type="hidden" name="fileToDel" value="{{$grupo->idDocumento}}">
-                        <button type="submit" class="btn btn-link" style="margin-left:120px; margin-top: -380px" type="button"><i class="glyphicon glyphicon-remove-sign"></i></button>
+                        <button type="submit" class="btn btn-link delete" style="margin-left:120px; margin-top: -380px" type="button"><i class="glyphicon glyphicon-remove-sign"></i></button>
                     </form>
                 </div>
 
