@@ -58,7 +58,7 @@
                 <span class="icon-bar"></span>
             </button>
 
-            <a class="navbar-brand page-scroll" href="#page-top" id="menu-toggle"> Paleta:
+            <a class="navbar-brand page-scroll" href="#page-top" id="menu-toggle">Tools:
                 <span id="pltv" class="pocultar"><i class="glyphicon glyphicon-eye-open"></i></span>
                 <span id="plto" class="pver"><i class="glyphicon glyphicon-eye-close"></i></span>
             </a>
@@ -66,10 +66,13 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
-            <li><h3 class="page-scroll">Title: {{$title}}</h3></li>
+
                 <li><a class="page-scroll" href="/perfil">
                         Bienvenido, {{$user}}</a></li>
-                <li>
+                <li><a class="page-scroll" href="#">
+                         Doc: {{$title}}</a>
+
+                </li>
                 <li>
                     <a class="page-scroll" href="/principal"><i class="glyphicon glyphicon-home"></i> Principal</a>
                 </li>

@@ -171,9 +171,10 @@
 
 .tituloDoc{
 	position: absolute;
-	top:20px;
+	top:50px;
 	width: 160px;
 	text-align:center;
 	font-size: 19px;
 	font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+
 }

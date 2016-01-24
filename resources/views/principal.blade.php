@@ -105,6 +105,10 @@
                         <input type="hidden" name="fileToLoad" value="{{$grupo->titulo}}">
                     <button type="submit" class="btn btn-info" style="margin-left:50px; margin-top: 175px" type="button">Cargar</button>
                     </form>
+                    <form action="/BorrarDoc" >
+                        <input type="hidden" name="fileToDel" value="{{$grupo->idDocumento}}">
+                        <button type="submit" class="btn btn-link" style="margin-left:120px; margin-top: -380px" type="button"><i class="glyphicon glyphicon-remove-sign"></i></button>
+                    </form>
                 </div>
 
             @empty

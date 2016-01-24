@@ -130,8 +130,14 @@ class DocumentoController extends Controller {
         return view('nuevo', ['doc' => $documento,'user'=>$user ,'title'=>$req->fileToLoad]);
     }
 
-    public function eliminarDoc($id){
-        Documento::where('idDocumento', $id)->first()->delete();
+    public function eliminarDoc(Request $req){
+
+        Documento::where('idDocumento', $req->fileToDel)->delete();
+        session_start();
+        $user = $_SESSION['nameusuario'];
+        $iduser=Usuario::getIdUser($_SESSION['usuarioespol']);
+        $documentos=Documento::ObtenerMisDocus($iduser);
+        return view('principal', ['user' => $user, 'docs'=>$documentos]);
     }
 
 

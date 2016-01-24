@@ -40,6 +40,8 @@ Route::post('loadDocum', 'DocumentoController@cargarDoc');
 Route::post('modDocum', 'DocumentoController@modificarDoc');
 
 Route::get('CargarDocDesdePrincipal','DocumentoController@cargarDesdePrincipal');
+
+Route ::get('BorrarDoc','DocumentoController@eliminarDoc');
 /*
 |--------------------------------------------------------------------------
 | Application Routes
