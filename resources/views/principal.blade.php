@@ -98,39 +98,45 @@
 <div style="height:1000px; background-image: url(img/6.jpg)" id="principal">
 
     <div id="infoprincipal" style="display:inline-block;">
-            <div class="documento"></div>
-            <div class="documento"></div>
-            <div class="documento"></div>
-            <div class="documento"></div>
+         @forelse ($docs as $grupo)
+                <div class="documento">
+                    <p class="tituloDoc"><strong><em>{{$grupo->titulo}}</em></strong></p>
+                    <button type="button" class="btn btn-info" style="margin-left:50px; margin-top: 175px" type="button">Cargar</button>
+                </div>
 
-    </div>
+            @empty
+
+            @endforelse
+
+
+</div>
 </div>
 <div class="container">
-    <div class="row">
-        <div class="col-lg-10 col-lg-offset-1 text-center">
-            <h4><strong>Diagram Pol</strong>
-            </h4>
-            <p>Escuela Superior Politecnica del Litoral</p>
-            <ul class="list-unstyled">
-                <li> Daw Fiec 2015</li>
+<div class="row">
+<div class="col-lg-10 col-lg-offset-1 text-center">
+<h4><strong>Diagram Pol</strong>
+</h4>
+<p>Escuela Superior Politecnica del Litoral</p>
+<ul class="list-unstyled">
+<li> Daw Fiec 2015</li>
 
-            </ul>
-            <br>
-            <ul class="list-inline">
-                <li>
-                    <a href="#"><i class="fa fa-facebook fa-fw fa-3x"></i></a>
-                </li>
-                <li>
-                    <a href="#"><i class="fa fa-twitter fa-fw fa-3x"></i></a>
-                </li>
-                <li>
-                    <a href="#"><i class="fa fa-dribbble fa-fw fa-3x"></i></a>
-                </li>
-            </ul>
-            <hr class="small">
-            <p class="text-muted">Copyright &copy; Fiec 2015</p>
-        </div>
-    </div>
+</ul>
+<br>
+<ul class="list-inline">
+<li>
+<a href="#"><i class="fa fa-facebook fa-fw fa-3x"></i></a>
+</li>
+<li>
+<a href="#"><i class="fa fa-twitter fa-fw fa-3x"></i></a>
+</li>
+<li>
+<a href="#"><i class="fa fa-dribbble fa-fw fa-3x"></i></a>
+</li>
+</ul>
+<hr class="small">
+<p class="text-muted">Copyright &copy; Fiec 2015</p>
+</div>
+</div>
 </div>
 <!-- /#wrapper -->
 
