@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\usuario_documento;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Http\Request;
 use App\Documento;
@@ -66,6 +67,12 @@ class DocumentoController extends Controller {
             $documento->fechaModif = $date;
 
             $documento->save();
+
+            $relacionUsDoc=new usuario_documento();
+            $relacionUsDoc->usuario=$id;
+            $relacionUsDoc->documento=$documento->idDocumento;
+            $relacionUsDoc->save();
+
             $_SESSION['documento'] = $documento->idDocumento;
             //return Redirect::back()->withMessage('Documento guardado');
             return view('nuevo', ['doc' => $documento, 'user' => $user, 'title' => $documento->titulo]);
@@ -142,6 +149,7 @@ class DocumentoController extends Controller {
 
     public function eliminarDoc(Request $req){
 
+        usuario_documento::where('documento', $req->fileToDel)->delete();
         Documento::where('idDocumento', $req->fileToDel)->delete();
         session_start();
         $user = $_SESSION['nameusuario'];
