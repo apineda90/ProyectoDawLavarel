@@ -110,6 +110,7 @@ $(document).ready(function(){
 <div style="height:1000px; background-image: url(img/6.jpg)" id="principal">
 
     <div id="infoprincipal" style="display:inline-block;">
+
          @forelse ($docs as $grupo)
                 <div class="documento">
                     <form action="/CargarDocDesdePrincipal" method="get">
@@ -122,6 +123,7 @@ $(document).ready(function(){
                         <input type="hidden" name="fileToDel" value="{{$grupo->idDocumento}}">
                         <button type="submit" class="btn btn-link delete" style="margin-left:120px; margin-top: -380px" type="button"><i class="glyphicon glyphicon-remove-sign"></i></button>
                     </form>
+
                     <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#CompartirModal" class="page-scroll"
                             style="margin-left:80px; margin-top: -95px">Compartir</button>
 

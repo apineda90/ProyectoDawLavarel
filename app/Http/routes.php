@@ -44,6 +44,8 @@ Route::get('CargarDocDesdePrincipal','DocumentoController@cargarDesdePrincipal')
 Route ::get('BorrarDoc','DocumentoController@eliminarDoc');
 
 Route::get('/lfmember','CompartidosController@search');
+
+Route::get('/addmember','CompartidosController@store');
 /*
 |--------------------------------------------------------------------------
 | Application Routes

@@ -63,7 +63,17 @@ $(document).mouseup(function (e)
 
 });
 
-$(document).on("click", "#grupo", function(evento){
+
+
+});
+
+$(document).on('click','#vol',function(ev){
+	alert($(ev.target).attr('data-id'));
+});
+
+
+/*
+$(document).on('click','#vol', function(evento){
 	//console.log($(evento.target).attr('data-id'));
 	$.ajax({
 		type:"POST",
@@ -83,5 +93,4 @@ $(document).on("click", "#grupo", function(evento){
 		}
 	});
 });
-
-});
+*/
