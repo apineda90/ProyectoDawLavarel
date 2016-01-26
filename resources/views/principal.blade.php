@@ -2,39 +2,41 @@
 <html lang="en">
 
 <head>
-
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="js/jQueryRotate.js" ></script>
     <script src="js/jquery-1.11.3.js" ></script>
     <script src="js/jsPlumb-2.0.4.js" ></script>
     <script src="js/bootstrap.js" ></script>
-    <script src="js/bootstrap.min.js" ></script>
+    <script src="js/scriptSearch.js" ></script>
     <script src="js/script1.js" ></script>
+    <script src="js/script.js" ></script>
+
     <script src="js/jquery.js" ></script>
     <script src="js/jquery-ui.js" ></script>
     <script src="js/jquery-ui.min.js" ></script>
     <link rel="stylesheet" href="css/style1.css"/>
     <link rel="stylesheet" href="css/bootstrap.css"/>
     <link href="css/simple-sidebar.css" rel="stylesheet">
-
     <script src="http://www.google.com/jsapi" type="text/javascript"></script>
-    <script type="text/javascript">
-        google.load("jquery", "1.4.2");
-        google.load("jqueryui", "1.7.2");
-    </script>
+    <script src="js/jquery-1.4.2.js" type="text/javascript"></script>
+    <script src="js/jquery-ui-1.7.2.js" type="text/javascript"></script>
+    <script src="js/bootstrap.min.js" ></script>
+
+
+
+
     <title>Mis Diagramas - DiagramPOl</title>
 
-    <!-- Bootstrap Core CSS -->
 
-    <!-- Custom CSS -->
-
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+
+
+
+
+
+
 <script language="JavaScript" type="text/javascript">
 $(document).ready(function(){
     $("button.delete").click(function(e){
@@ -88,7 +90,7 @@ $(document).ready(function(){
                 <li>
                     <a class="page-scroll" href="/perfil"><i class="glyphicon glyphicon-user"></i> Perfil</a>
                 </li>
-                <li>
+                              <li>
                     <a class="page-scroll" href="/logout"><i class="glyphicon glyphicon-off"></i> Salir</a>
                 </li>
             </ul>
@@ -113,21 +115,57 @@ $(document).ready(function(){
                     <form action="/CargarDocDesdePrincipal" method="get">
                     <p class="tituloDoc"><strong><em>{{$grupo->titulo}}</em></strong></p>
                         <input type="hidden" name="fileToLoad" value="{{$grupo->titulo}}">
-                    <button type="submit" class="btn btn-info" style="margin-left:50px; margin-top: 175px" type="button">Cargar</button>
+                    <button type="submit" class="btn btn-info" style="margin-left:5px; margin-top: 175px" type="button">Cargar</button>
                     </form>
+
                     <form action="/BorrarDoc" >
                         <input type="hidden" name="fileToDel" value="{{$grupo->idDocumento}}">
                         <button type="submit" class="btn btn-link delete" style="margin-left:120px; margin-top: -380px" type="button"><i class="glyphicon glyphicon-remove-sign"></i></button>
                     </form>
+                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#CompartirModal" class="page-scroll"
+                            style="margin-left:80px; margin-top: -95px">Compartir</button>
+
                 </div>
 
             @empty
 
             @endforelse
+    </div>
+</div>
 
 
+
+<div class="modal fade" id="CompartirModal" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Compartir documento</h4>
+            </div>
+            <div class="modal-body">
+                <b>Ingrese nombre del usuario:</b>
+                <form class="navbar-form " role="search">
+                    <div class="input-group">
+                        <input type="text" name="agregarMiembro" id="inputo" class="form-control" placeholder="Agregue un compañero...">
+                        <span class="input-group-addon" id="basic-addon1"><i class="fa fa-search"></i></span>
+                    </div>
+                    <div class="displaygroup"></div>
+                </form>
+
+
+            </div>
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-default" data-dismiss="modal" data-target="#loadModal">Cancelar</button>
+            </div>
+        </div>
+
+    </div>
 </div>
-</div>
+
+
 <div class="container">
 <div class="row">
 <div class="col-lg-10 col-lg-offset-1 text-center">

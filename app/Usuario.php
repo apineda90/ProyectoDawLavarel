@@ -49,6 +49,18 @@ class Usuario extends Model
             ->first();
         return $usu->idUsuario;
     }
+
+    public function scopeMembers($query , $full_name)
+    {
+        if( trim($full_name) != "" )
+        {
+            return $query
+                ->where( 'usuario' , 'LIKE' , "$full_name%" )
+                ->orWhere( 'usuario' , 'LIKE' , "% $full_name%" );
+        }
+        else
+            return 'p';
+    }
     /*Save is also used to update*/
 
 }

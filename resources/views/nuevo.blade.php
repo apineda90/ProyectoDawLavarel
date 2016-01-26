@@ -76,12 +76,10 @@
                 <li>
                     <a class="page-scroll" href="/principal"><i class="glyphicon glyphicon-home"></i> Principal</a>
                 </li>
-
                 <li>
                     <a class="page-scroll" href="/compartidos"><i class="glyphicon glyphicon-user"></i>
                         <i class="glyphicon glyphicon-user"></i> Compartidos</a>
                 </li>
-
                 <li>
                     <a data-toggle="modal" id="htmlListo" data-target="#saveModal" class="page-scroll" href="#"><i class="glyphicon glyphicon-floppy-disk"></i> Crear</a>
                 </li>
