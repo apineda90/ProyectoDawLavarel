@@ -12,6 +12,8 @@
     <script src="js/jquery.js" ></script>
     <script src="js/jquery-ui.js" ></script>
     <script src="js/jquery-ui.min.js" ></script>
+    <script src="http://parall.ax/parallax/js/jspdf.js"></script>
+    <script src="js/html2canvas.js" ></script>
     <link rel="stylesheet" href="css/style1.css"/>
     <link rel="stylesheet" href="css/bootstrap.css"/>
     <link href="css/simple-sidebar.css" rel="stylesheet">
@@ -87,7 +89,7 @@
                     <a data-toggle="modal" id="htmlModif" data-target="#modifModal" class="page-scroll" href="#"><i class="glyphicon glyphicon-floppy-disk"></i> Guardar</a>
                 </li>
                  <li>
-                    <a data-toggle="modal" data-target="#loadModal" class="page-scroll" href="#"><i class="glyphicon glyphicon-floppy-disk"></i> Cargar</a>
+                    <a data-toggle="modal" data-target="#exportModal" class="page-scroll" href="#"><i class="glyphicon glyphicon-floppy-disk"></i> Exportar</a>
                 </li>
                 <li>
                     <a class="page-scroll" href="/perfil"><i class="glyphicon glyphicon-user"></i> Perfil</a>
@@ -269,6 +271,29 @@
     </div>
   </div>
   
+
+    <div class="modal fade" id="exportModal" role="dialog">
+        <div class="modal-dialog">
+        
+          <!-- Modal content-->
+          <div class="modal-content">
+       
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Exportar documento</h4>
+            </div>
+            <div class="modal-body">
+            <input type="text" id="exportDoc" name="fileToExport" placeholder="Exportar archivo"><br><br>
+            </div>
+            <div class="modal-footer"> 
+                <button type="button" id="expDoc" class="btn btn-default" data-target="#exportModal">Exportar</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" data-target="#exportModal">Cancelar</button>
+            </div>
+            
+          </div>
+          
+        </div>
+  </div>
 </div>
 
 <footer class="footer">

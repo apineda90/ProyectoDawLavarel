@@ -14,6 +14,18 @@ $(document).ready(function() {
 
 	var i=0;
 
+	$('#expDoc').click(function(){
+		html2canvas($("#canvas"), {
+            onrendered: function(canvas) {         
+                var imgData = canvas.toDataURL(
+                    'image/JPEG');              
+                var doc = new jsPDF('p', 'mm');
+                doc.addImage(imgData, 'JPEG', -67, 10);
+                doc.save('sample-file.pdf');
+            }
+        });
+	});
+
 	// inicializo la paleta
 	for (i=0; i<=13; i++){
 		$("#objeto"+i).load("svg/"+i+".svg", function( response, status, xhr ) {
