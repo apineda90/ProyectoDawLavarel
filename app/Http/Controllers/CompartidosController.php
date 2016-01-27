@@ -82,16 +82,10 @@ class CompartidosController extends Controller
         echo"<script>alert('El documento ha sido compartido con exito!! ')</script>";
 
         session_start();
-
-        if(isset($_SESSION['nameusuario']))
-        {
-            $user = $_SESSION['nameusuario'];
-            $iduser=Usuario::getIdUser($_SESSION['usuarioespol']);
-            $documentos=Documento::ObtenerMisDocus($iduser);
-            return view('principal', ['user' => $user, 'docs'=>$documentos]);
-        }
-        else
-            return view ('welcome');
+        $user = $_SESSION['nameusuario'];
+        $iduser=Usuario::getIdUser($_SESSION['usuarioespol']);
+        $documentos=Documento::ObtenerMisDocus($iduser);
+        return view('principal', ['user' => $user, 'docs'=>$documentos]);
     }
 
     public function stored(Request $request)

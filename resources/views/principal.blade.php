@@ -180,7 +180,8 @@ $(document).ready(function(){
             </div>
             <div class="modal-body">
                 <b>Está seguro de compartir este documento?</b>
-                <form action="CompartirDocu" method="get">
+                <form action="CompartirDocu" method="post">
+                    <input name="_token" type="hidden">
                     <input type="hidden" name="userChosen" id="dce">
                     <input type="hidden" name="docChosen" id="da">
                     <button type="submit">Aceptar</button>

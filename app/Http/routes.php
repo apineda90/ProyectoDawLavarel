@@ -47,7 +47,7 @@ Route::get('/lfmember','CompartidosController@search');
 
 Route::get('/addmember','CompartidosController@store');
 
-Route::get('/CompartirDocu','CompartidosController@store');
+Route::post('/CompartirDocu','CompartidosController@store');
 /*
 |--------------------------------------------------------------------------
 | Application Routes
