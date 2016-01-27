@@ -33,6 +33,25 @@ class Documento extends Model
         return 0;
     }
 
+    public static function EsmiDoc($idDoc,$idusuario){
+        $documento = Documento::where('owner',$idusuario)->where('idDocumento',$idDoc)->first();
+
+        if(isset($documento))
+        return true;
+        else
+            return false;
+    }
+
+    public static function ObtenerDocuById($id)
+    {
+        $documento = Documento::where('idDocumento',$id)
+            ->first();
+        if(isset($documento))
+            return $documento;
+        return 0;
+    }
+
+
 
 
     function usuario(){

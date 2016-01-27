@@ -41,6 +41,8 @@ Route::post('modDocum', 'DocumentoController@modificarDoc');
 
 Route::get('CargarDocDesdePrincipal','DocumentoController@cargarDesdePrincipal');
 
+Route::get('CargarDocDesdePrincipalComp','DocumentoController@cargarDesdePrincipalComp');
+
 Route ::get('BorrarDoc','DocumentoController@eliminarDoc');
 
 Route::get('/lfmember','CompartidosController@search');

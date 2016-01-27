@@ -147,6 +147,19 @@ class DocumentoController extends Controller {
         return view('nuevo', ['doc' => $documento,'user'=>$user ,'title'=>$req->fileToLoad]);
     }
 
+    public static function cargarDesdePrincipalComp(Request $req){
+
+        session_start();
+        $userespol=$_SESSION['usuarioespol'];
+        $user=$_SESSION['nameusuario'];
+        $id=Usuario::getIdUser($userespol);
+
+        $documento = Documento::where('titulo', $req->fileToLoad)->first();
+        $_SESSION['documento'] = $documento->idDocumento;
+        //return Redirect::back()->withMessage('Documento cargado')->with('doc', $documento);
+        return view('nuevo', ['doc' => $documento,'user'=>$user ,'title'=>$req->fileToLoad]);
+    }
+
     public function eliminarDoc(Request $req){
 
         usuario_documento::where('documento', $req->fileToDel)->delete();
