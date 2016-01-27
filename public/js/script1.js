@@ -21,7 +21,7 @@ $(document).ready(function() {
                     'image/JPEG');              
                 var doc = new jsPDF('p', 'mm');
                 doc.addImage(imgData, 'JPEG', -67, 10);
-                doc.save('sample-file.pdf');
+                doc.save($('#exportDoc').val());
             }
         });
 	});
