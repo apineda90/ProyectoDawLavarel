@@ -124,14 +124,15 @@ $(document).ready(function(){
                         <button type="submit" class="btn btn-link delete" style="margin-left:120px; margin-top: -380px" type="button"><i class="glyphicon glyphicon-remove-sign"></i></button>
                     </form>
 
-                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#CompartirModal" class="page-scroll"
-                            style="margin-left:80px; margin-top: -95px">Compartir</button>
+                    <button type="button" class="btn btn-warning" data-toggle="modal" data-id="{{$grupo->idDocumento}}" data-target="#CompartirModal" class="page-scroll"
+                            style="margin-left:80px; margin-top: -95px" id="coco">Compartir</button>
 
                 </div>
 
             @empty
 
             @endforelse
+             <input type="text" name="docactual" id="da">
     </div>
 </div>
 
