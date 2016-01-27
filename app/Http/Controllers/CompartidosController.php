@@ -31,7 +31,7 @@ class CompartidosController extends Controller
         else
             return view ('welcome');
     }
-    
+
     public static function search(Request $request)
     {
         $html = '';

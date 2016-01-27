@@ -83,13 +83,13 @@
                         <i class="glyphicon glyphicon-user"></i> Compartidos</a>
                 </li>
                 <li>
-                    <a data-toggle="modal" id="htmlListo" data-target="#saveModal" class="page-scroll" href="#"><i class="glyphicon glyphicon-floppy-disk"></i> Crear</a>
+                    <a data-toggle="modal" id="htmlListo" data-target="#saveModal" class="page-scroll" href="#"><i class="glyphicon glyphicon glyphicon-asterisk"></i> Crear</a>
                 </li>
                 <li>
                     <a data-toggle="modal" id="htmlModif" data-target="#modifModal" class="page-scroll" href="#"><i class="glyphicon glyphicon-floppy-disk"></i> Guardar</a>
                 </li>
                  <li>
-                    <a data-toggle="modal" data-target="#exportModal" class="page-scroll" href="#"><i class="glyphicon glyphicon-floppy-disk"></i> Exportar</a>
+                    <a data-toggle="modal" data-target="#exportModal" class="page-scroll" href="#"><i class="glyphicon glyphicon glyphicon-download-alt"></i> Exportar</a>
                 </li>
                 <li>
                     <a class="page-scroll" href="/perfil"><i class="glyphicon glyphicon-user"></i> Perfil</a>

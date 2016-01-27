@@ -103,7 +103,7 @@
             <li><strong>Correo:</strong>&nbsp;&nbsp;{{$datoUsuario->email}}</li>
             <li><strong>Docs Compartidos:</strong>&nbsp;&nbsp;4</li>
         </ul>
-        <button class="btb btn-primary" style="margin-left:9%; display:block" type="button">Editar</button>
+        <!--<button class="btb btn-primary" style="margin-left:9%; display:block" type="button">Editar</button>-->
 
     </div>
     <br><br>
