@@ -46,6 +46,8 @@ Route ::get('BorrarDoc','DocumentoController@eliminarDoc');
 Route::get('/lfmember','CompartidosController@search');
 
 Route::get('/addmember','CompartidosController@store');
+
+Route::get('/CompartirDocu','CompartidosController@store');
 /*
 |--------------------------------------------------------------------------
 | Application Routes

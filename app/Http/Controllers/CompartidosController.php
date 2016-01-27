@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Usuario;
 use App\Documento;
+use App\usuario_documento;
 use Illuminate\Database\Eloquent\Collection;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -55,7 +56,8 @@ class CompartidosController extends Controller
                                 </div>';
             }else{
                 $html .= '         <div class="media-right">
-              <button type="button" class="btn btn-info btn-xs" id="vol" data-id="' . $user->idUsuario . '"> Agregar <i data-id="' . $user->idUsuario . '" class="glyphicon glyphicon-plus-sign"></i></button><br/>
+              <button type="button" class="btn btn-info btn-xs" id="vol" data-target="#CompartirConfirmModal" data-toggle="modal"
+              data-id="' . $user->idUsuario . '"> Agregar <i data-id="' . $user->idUsuario . '" class="glyphicon glyphicon-plus-sign"></i></button><br/>
 
 
                                 </div>';
@@ -70,11 +72,29 @@ class CompartidosController extends Controller
         return $html;
     }
 
-    public function storee(Request $req){
-        dd('horizonte');
+    public function store(Request $req){
+
+        $relacionUsDoc=new usuario_documento();
+        $relacionUsDoc->usuario=$req->userChosen;
+        $relacionUsDoc->documento=$req->docChosen;
+        $relacionUsDoc->save();
+
+        echo"<script>alert('El documento ha sido compartido con exito!! ')</script>";
+
+        session_start();
+
+        if(isset($_SESSION['nameusuario']))
+        {
+            $user = $_SESSION['nameusuario'];
+            $iduser=Usuario::getIdUser($_SESSION['usuarioespol']);
+            $documentos=Documento::ObtenerMisDocus($iduser);
+            return view('principal', ['user' => $user, 'docs'=>$documentos]);
+        }
+        else
+            return view ('welcome');
     }
 
-    public function store(Request $request)
+    public function stored(Request $request)
     {
         session_start();
         $html = "";

@@ -69,11 +69,12 @@ $(document).mouseup(function (e)
 
 $(document).on('click','#coco',function(){
 	var $id=$(this).attr('data-id');
-	$('input[name=docactual]').val($id);
+	$('input[name=docChosen]').val($id);
 });
 
 $(document).on('click','#vol',function(ev){
-	alert($(ev.target).attr('data-id'));
+	var $idu=$(ev.target).attr('data-id');
+	$('input[name=userChosen]').val($idu);
 });
 
 

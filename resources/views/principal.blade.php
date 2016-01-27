@@ -132,7 +132,7 @@ $(document).ready(function(){
             @empty
 
             @endforelse
-             <input type="text" name="docactual" id="da">
+
     </div>
 </div>
 
@@ -167,6 +167,36 @@ $(document).ready(function(){
 
     </div>
 </div>
+
+
+<div class="modal fade" id="CompartirConfirmModal" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Confirmación</h4>
+            </div>
+            <div class="modal-body">
+                <b>Está seguro de compartir este documento?</b>
+                <form action="CompartirDocu" method="get">
+                    <input type="hidden" name="userChosen" id="dce">
+                    <input type="hidden" name="docChosen" id="da">
+                    <button type="submit">Aceptar</button>
+                </form>
+
+
+            </div>
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-default" data-dismiss="modal" data-target="#loadModal">Cancelar</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
 
 
 <div class="container">
