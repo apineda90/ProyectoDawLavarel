@@ -96,10 +96,19 @@
 <div style="height:1000px; background-image: url(img/1.jpg)" id="principal">
 
     <div id="infoprincipal" style="display:inline-block;">
-            <div class="documentoc"></div>
-            <div class="documentoc"></div>
-            <div class="documentoc"></div>
-            <div class="documentoc"></div>
+        @forelse ($docs as $grupo)
+            <div class="documento">
+                <form action="/CargarDocDesdePrincipalComp" method="get">
+                    <p class="tituloDoc"><strong><em>{{$grupo->titulo}}</em></strong></p>
+                    <input type="hidden" name="fileToLoad" value="{{$grupo->titulo}}">
+                    <button type="submit" class="btn btn-info" style="margin-left:5px; margin-top: 175px" type="button">Cargar</button>
+                </form>
+
+            </div>
+
+        @empty
+
+        @endforelse
 
     </div>
 </div>

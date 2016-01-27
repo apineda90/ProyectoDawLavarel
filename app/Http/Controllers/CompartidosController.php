@@ -17,19 +17,21 @@ use Illuminate\Support\Facades\WebService\WebService;
 class CompartidosController extends Controller
 {
 
-   
+
     public function indexCompartidos()
     {
         session_start();
 
         if(isset($_SESSION['nameusuario'])) {
             $user = $_SESSION['nameusuario'];
-            return view('compartidos', ['user' => $user]);
+            $iduser=Usuario::getIdUser($_SESSION['usuarioespol']);
+            $docus=usuario_documento::ObtenerMisDocusComp($iduser);
+            return view('compartidos', ['user' => $user,'docs'=>$docus]);
         }
         else
             return view ('welcome');
     }
-
+    
     public static function search(Request $request)
     {
         $html = '';
