@@ -15,6 +15,12 @@ class usuario_documento extends Model
 
     protected $fillable = ['usuario', 'documento'];
 
-    
+    public static function userDocuExists($iduser,$iddocu){
+        $userdoc = usuario_documento::where('usuario', $iduser)->where('documento',$iddocu)
+            ->first();
+        if(isset($userdoc))
+            return 1;
+        return 0;
+    }    
 }
 

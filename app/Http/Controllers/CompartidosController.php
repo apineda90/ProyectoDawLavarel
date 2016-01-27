@@ -73,19 +73,27 @@ class CompartidosController extends Controller
     }
 
     public function store(Request $req){
-
-        $relacionUsDoc=new usuario_documento();
-        $relacionUsDoc->usuario=$req->userChosen;
-        $relacionUsDoc->documento=$req->docChosen;
-        $relacionUsDoc->save();
-
-        echo"<script>alert('El documento ha sido compartido con exito!! ')</script>";
-
         session_start();
         $user = $_SESSION['nameusuario'];
         $iduser=Usuario::getIdUser($_SESSION['usuarioespol']);
         $documentos=Documento::ObtenerMisDocus($iduser);
-        return view('principal', ['user' => $user, 'docs'=>$documentos]);
+
+        if(usuario_documento::userDocuExists($req->userChosen,$req->docChosen)==0) {
+            $relacionUsDoc=new usuario_documento();
+            $relacionUsDoc->usuario=$req->userChosen;
+            $relacionUsDoc->documento=$req->docChosen;
+            $relacionUsDoc->save();
+
+            echo"<script>alert('El documento ha sido compartido con exito!! ')</script>";
+
+            return view('principal', ['user' => $user, 'docs'=>$documentos]);
+        }
+        else{
+            echo '<script language="javascript">';
+            echo 'alert("El documento ya esta compartido con el usuario.")';
+            echo '</script>';
+            return view('principal', ['user' => $user, 'docs'=>$documentos]);
+        }
     }
 
     public function stored(Request $request)
