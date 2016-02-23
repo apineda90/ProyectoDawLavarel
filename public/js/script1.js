@@ -8,11 +8,52 @@ function saveHtml(file, id, type) {
     link.click(); 
 }
 
+function Stack(){
+	this.stac = new Array();
+	
+	this.pop=function(){
+		return this.stac.pop();
+	}
+	
+	this.push=function(item){
+		this.stac.push(item);
+	}
+}
+
 $(document).ready(function() {
+	document.onkeydown = KeyPress;
 	var rotate=0; // variable para rotar los objetos con shift+click
 	objetos = 0; // contados de objetos arrastrados al canvas (desde la paleta)
 
 	var i=0;
+
+	var stack = new Stack();
+
+	function KeyPress(e) {
+		var evtobj = window.event? event : e
+		if (evtobj.keyCode == 90 && evtobj.ctrlKey){
+
+			var undo = stack.pop();
+			var id = undo[0];
+
+			if(undo[1] == "in"){
+				$(id).fadeOut();
+			}
+			else if(undo[1] == "out"){
+				$(id).fadeIn();
+			}
+			else if(undo[1] == "rot"){
+				rotate -= 90;
+				$(id).rotate(rotate);
+			}
+			else{
+				var left = undo[1];
+				var top = undo[2];
+				$('#'+id).css({top: top+'px', left: left+'px'});
+			}
+
+		}
+	}
 
 	$('#expDoc').click(function(){
 		html2canvas($("#canvas"), {
@@ -80,14 +121,17 @@ $(document).ready(function() {
 	    	console.log(nombre);
 	    	$(nombre).css({"left":pos.left,"top":pos.top});
 	    	$(nombre).removeClass("drag");
+	    	stack.push([nombre, "in"]);
 	       	//cuando objeto se arrastra
 	        $(nombre).draggable({
 	        	containment: 'parent',
+	        	start:function(ev, ui){
+		        	var pos=$(ui.helper).offset();
+		        	console.log($(this).attr("id"));
+		            stack.push([$(this).attr("id"), pos.left, pos.top]);
+	        	},
 	            stop:function(ev, ui) {
-	            	var pos=$(ui.helper).offset();
-	            	console.log($(this).attr("id"));
-					console.log(pos.left)
-	                console.log(pos.top)
+
 	            }
 	        });
 	        //objeto desaparece cuando aplasto rueda del mouse
@@ -97,11 +141,15 @@ $(document).ready(function() {
 			    if (event.shiftKey) {
 			    	rotate += 90;
 			        $(this).rotate(rotate);
+    		        var nombre = "#"+$(this).attr("id");
+      				stack.push([nombre, "rot"]);
 			    } 
 			});
 			$(".hideable").mousedown(function(e){
 		       	if( e.button == 1 ) { 
 		      		$(this).fadeOut();
+		      		var nombre = "#"+$(this).attr("id");
+		      		stack.push([nombre, "out"]);
 		      		return false; 
 		    	} 
 		    	return true; 
@@ -113,7 +161,6 @@ $(document).ready(function() {
 	$(".canvas").droppable({
 		cancel: "",
 		drop: function(ev, ui) {
-			console.log(ui.helper);
 			if (ui.helper.attr('id').search(/objeto[0-9]/) != -1){
 				objetos++;
 				var element=$(ui.draggable).clone();
@@ -136,7 +183,13 @@ $(document).ready(function() {
 	$('.import').addClass("dragImport");
 	$('.dragImport').draggable({
 		cancel: "",
-		containment: 'parent'
+		containment: 'parent',
+	    start:function(ev, ui){
+        	var pos=$(ui.helper).offset();
+            stack.push([$(this).attr("id"), pos.left, pos.top]);
+	    },
+        stop:function(ev, ui) {
+        }
 	});
 	$('.import').addClass("hideableImport");
 	$('.import').addClass("rotateImport");
@@ -149,11 +202,15 @@ $(document).ready(function() {
 		    if (event.shiftKey) {
 		    	rotate += 90;
 		        $(this).rotate(rotate);
+		        var nombre = "#"+$(this).attr("id");
+      			stack.push([nombre, "rot"]);
 		    } 
 		});
 	$(".hideableImport").mousedown(function(e){
        	if( e.button == 1 ) { 
       		$(this).fadeOut();
+      		var nombre = "#"+$(this).attr("id");
+      		stack.push([nombre, "out"]);
       		return false; 
     	} 
     	return true; 
