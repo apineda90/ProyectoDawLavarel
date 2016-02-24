@@ -16,11 +16,79 @@ function Stack(){
 	}
 	
 	this.push=function(item){
-		this.stac.push(item);
+			this.stac.push(item);
+		}
+	}
+
+	function Queue(){
+		this.stac=new Array();
+
+	this.dequeue=function(){
+		return this.stac.pop();
+	}
+
+	this.enqueue=function(item){
+		this.stac.unshift(item);
 	}
 }
+  function estado_current(id,x,y){
+console.log("asdasd");
+    $.get( "/graph/" + id, function( data ) {
+    	
+		$('#'+id).css({top: y+'px', left: x+'px'});
+
+    });
+     	
+  }
 
 $(document).ready(function() {
+  //   var outputEl = document.getElementById('client_event_example_log');
+/*var pusher = new Pusher('YOUR_APP_KEY');
+
+channel.bind('my-event', function(data) {
+  alert('An event was triggered with message: ' + data);
+});*/
+
+  // this method should be bound as a 'mousemove' event listener
+
+	$('.dragImport').draggable({
+      cancel: "",
+      containment: 'parent',
+        start:function(ev, ui){ // comienza el drag
+            var pos=$(ui.helper).offset();
+            ini = [pos.left, pos.top];
+            //console.log(ini);
+            
+        },
+        stop:function(ev, ui) { // termina el drag
+            var pos=$(ui.helper).offset();
+           
+            //console.log($(this).attr("id")+" "+pos.left+" "+pos.top+" "+ini[0]+" "+ini[1]);
+            stack.push([$(this).attr("id"), pos.left, pos.top, ini[0], ini[1]]);
+            data = {'id':$(this).attr("id"), 'x':pos.left, 'y':pos.top};
+            $.post( "/graph", data, function( data ) {
+
+   			 });
+          }
+    });
+
+
+
+/*
+	  setInterval(function(){
+	    if(state.currentX !== state.lastX || state.currentY !== state.lastY){
+	      state.lastX = state.currentX;
+	      state.lastY = state.currentY;
+
+	      var text = document.createTextNode(
+	        'Triggering event due to state change: x: ' + state.currentX + ', y: ' + state.currentY
+	      );
+	      outputEl.replaceChild( text, outputEl.firstChild );
+
+	      channel.trigger("client-mouse-moved", "my-event", {state:state});
+	    }
+	  }, 300); // send every 300 milliseconds if position has changed*/
+
 	document.onkeydown = KeyPress;
 	var rotate=0; // variable para rotar los objetos con shift+click
 	objetos = 0; // contados de objetos arrastrados al canvas (desde la paleta)
@@ -28,6 +96,9 @@ $(document).ready(function() {
 	var i=0;
 
 	var stack = new Stack();
+	var queue = new Queue();
+	var ini = [0,0];
+	var fin = [0,0];
 
 	function KeyPress(e) {
 		var evtobj = window.event? event : e
@@ -38,20 +109,48 @@ $(document).ready(function() {
 
 			if(undo[1] == "in"){
 				$(id).fadeOut();
+				queue.enqueue(undo);
 			}
 			else if(undo[1] == "out"){
 				$(id).fadeIn();
+				queue.enqueue(undo);
 			}
 			else if(undo[1] == "rot"){
 				rotate -= 90;
 				$(id).rotate(rotate);
+				queue.enqueue(undo);
 			}
 			else{
-				var left = undo[1];
-				var top = undo[2];
+				var left = undo[3];
+				var top = undo[4];
 				$('#'+id).css({top: top+'px', left: left+'px'});
+				queue.enqueue(undo);
 			}
+		}
+		if (evtobj.keyCode == 89 && evtobj.ctrlKey){
 
+			redo = queue.dequeue();
+			var id = redo[0];
+
+			if(redo[1] == "out"){
+				$(id).fadeOut();
+				stack.push([id, "out"]);
+			}
+			else if(redo[1] == "in"){
+				$(id).fadeIn();
+				stack.push([id, "in"]);
+			}
+			else if(redo[1] == "rot"){
+				rotate += 90;
+				$(id).rotate(rotate);
+				stack.push([id, "rot"]);
+			}
+			else{
+				var left = redo[1];
+				var top = redo[2];
+				$('#'+id).css({top: top+'px', left: left+'px'});
+				stack.push(undo);
+			}
 		}
 	}
 
@@ -128,10 +227,14 @@ $(document).ready(function() {
 	        	start:function(ev, ui){
 		        	var pos=$(ui.helper).offset();
 		        	console.log($(this).attr("id"));
-		            stack.push([$(this).attr("id"), pos.left, pos.top]);
+		        	ini = [pos.left, pos.top];
+		           	console.log(ini);
 	        	},
-	            stop:function(ev, ui) {
-
+	            stop:function(ev, ui) { // termino de hacer drag
+	            	var outputEl = document.getElementById('client_event_example_log');
+	            	var pos=$(ui.helper).offset();
+	            	console.log($(this).attr("id")+" "+pos.left+" "+pos.top+" "+ini[0]+" "+ini[1]);
+	            	 stack.push([$(this).attr("id"), pos.left, pos.top, ini[0], ini[1]]);
 	            }
 	        });
 	        //objeto desaparece cuando aplasto rueda del mouse
@@ -184,11 +287,17 @@ $(document).ready(function() {
 	$('.dragImport').draggable({
 		cancel: "",
 		containment: 'parent',
-	    start:function(ev, ui){
+	    start:function(ev, ui){ // comienza el drag
         	var pos=$(ui.helper).offset();
-            stack.push([$(this).attr("id"), pos.left, pos.top]);
+        	ini = [pos.left, pos.top];
+        	console.log(ini);
+        	
+            
 	    },
-        stop:function(ev, ui) {
+        stop:function(ev, ui) { // termina el drag
+        	var pos=$(ui.helper).offset();
+        	console.log($(this).attr("id")+" "+pos.left+" "+pos.top+" "+ini[0]+" "+ini[1]);
+        	stack.push([$(this).attr("id"), pos.left, pos.top, ini[0], ini[1]]);
         }
 	});
 	$('.import').addClass("hideableImport");
@@ -214,6 +323,10 @@ $(document).ready(function() {
       		return false; 
     	} 
     	return true; 
-	}); 
+	});
+
+
+
+
 	
 });

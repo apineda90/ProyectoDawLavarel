@@ -9,6 +9,7 @@
     <script src="js/jsPlumb-2.0.4.js" ></script>
     <script src="js/bootstrap.js" ></script>
     <script src="js/script1.js" ></script>
+    <script src="js/script2.js" ></script>
     <script src="js/jquery.js" ></script>
     <script src="js/jquery-ui.js" ></script>
     <script src="js/jquery-ui.min.js" ></script>
@@ -18,6 +19,8 @@
     <link rel="stylesheet" href="css/bootstrap.css"/>
     <link href="css/simple-sidebar.css" rel="stylesheet">
     <script src="http://www.google.com/jsapi" type="text/javascript"></script>
+    <script src="//js.pusher.com/3.0/pusher.min.js"></script>
+
     <!--<script type="text/javascript">
         google.load("jquery", "1.4.2");
         google.load("jqueryui", "1.7.2");
@@ -49,7 +52,7 @@
     }
 ?>
 <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
-
+<div id="client_event_example_log">adasd</div>
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
@@ -66,7 +69,8 @@
             </a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">   
+
             <ul class="nav navbar-nav navbar-right">
 
                 <li><a class="page-scroll" href="/perfil">
@@ -318,6 +322,14 @@
     });
 
     </script>
+
+<script src="//js.pusher.com/2.2/pusher.min.js"></script>
+<script>
+    var pusher = new Pusher("{{ 'env(PUSHER_KEY)' }}");
+</script>
+<script src="js/pusher.js"></script>
+
+
 </body>
 <script src="js/jQueryRotate.js" ></script>
 </html>

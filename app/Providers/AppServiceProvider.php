@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Providers;
-
+use Event;
+use App\Grafico;
+use App\Events\ObjetoMovido;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -14,6 +16,9 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //
+        Grafico::created(function($item){
+            Event::fire(new ObjetoMovido($item));
+        });
     }
 
     /**

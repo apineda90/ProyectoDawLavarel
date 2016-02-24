@@ -43,13 +43,16 @@ Route::get('CargarDocDesdePrincipal','DocumentoController@cargarDesdePrincipal')
 
 Route::get('CargarDocDesdePrincipalComp','DocumentoController@cargarDesdePrincipalComp');
 
-Route ::get('BorrarDoc','DocumentoController@eliminarDoc');
+Route::get('BorrarDoc','DocumentoController@eliminarDoc');
 
 Route::get('/lfmember','CompartidosController@search');
 
 Route::get('/addmember','CompartidosController@store');
 
 Route::post('/CompartirDocu','CompartidosController@store');
+
+Route::resource('graph', 'GraficoController',
+    ['except' => ['create', 'edit']]);
 /*
 |--------------------------------------------------------------------------
 | Application Routes
