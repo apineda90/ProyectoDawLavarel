@@ -53,6 +53,8 @@ Route::post('/CompartirDocu','CompartidosController@store');
 
 Route::resource('graph', 'GraficoController',
     ['except' => ['create', 'edit']]);
+
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -63,7 +65,11 @@ Route::resource('graph', 'GraficoController',
 | kernel and includes session state, CSRF protection, and more.
 |
 */
-
 Route::group(['middleware' => ['web']], function () {
     //
+	Route::get('auth/github', 'Auth\AuthController@redirectToProvider');
+	    
+	Route::get('auth/github/callback', 'Auth\AuthController@handleProviderCallback');
+
 });
+

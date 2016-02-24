@@ -7,7 +7,10 @@
     "require": {
         "php": ">=5.5.9",
         "laravel/framework": "5.2.*",
-        "pusher/pusher-php-server": "2.2.1"
+        "pusher/pusher-php-server": "2.2.1",
+        "laravel/socialite": "2.0.*@dev",
+        "way/generators": "~3.0",
+        "phpspec/phpspec": "~2.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

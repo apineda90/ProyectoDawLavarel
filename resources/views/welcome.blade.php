@@ -117,7 +117,13 @@
                         <button type="submit" class="btn btn-primary" >
                             Ingresar
                         </button>
+                    
                     </div>
+                </form>
+                <form action="auth/github" method="get">
+                    <button type="submit" class="btn btn-primary" >
+                            GitHub
+                    </button>
                 </form>
             </div>
         </div>

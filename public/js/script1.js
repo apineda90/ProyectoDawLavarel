@@ -16,12 +16,12 @@ function Stack(){
 	}
 	
 	this.push=function(item){
-			this.stac.push(item);
-		}
+		this.stac.push(item);
 	}
+}
 
-	function Queue(){
-		this.stac=new Array();
+function Queue(){
+	this.stac=new Array();
 
 	this.dequeue=function(){
 		return this.stac.pop();
@@ -31,25 +31,18 @@ function Stack(){
 		this.stac.unshift(item);
 	}
 }
-  function estado_current(id,x,y){
-console.log("asdasd");
+
+function estado_current(id,x,y){
+	console.log("asdasd");
     $.get( "/graph/" + id, function( data ) {
     	
 		$('#'+id).css({top: y+'px', left: x+'px'});
 
     });
      	
-  }
+}
 
 $(document).ready(function() {
-  //   var outputEl = document.getElementById('client_event_example_log');
-/*var pusher = new Pusher('YOUR_APP_KEY');
-
-channel.bind('my-event', function(data) {
-  alert('An event was triggered with message: ' + data);
-});*/
-
-  // this method should be bound as a 'mousemove' event listener
 
 	$('.dragImport').draggable({
       cancel: "",
@@ -62,44 +55,28 @@ channel.bind('my-event', function(data) {
         },
         stop:function(ev, ui) { // termina el drag
             var pos=$(ui.helper).offset();
-           
-            //console.log($(this).attr("id")+" "+pos.left+" "+pos.top+" "+ini[0]+" "+ini[1]);
             stack.push([$(this).attr("id"), pos.left, pos.top, ini[0], ini[1]]);
             data = {'id':$(this).attr("id"), 'x':pos.left, 'y':pos.top};
-            $.post( "/graph", data, function( data ) {
+            $.post( "/graph", $(this).serialize(), function( data ) {
 
    			 });
           }
     });
-
-
-
-/*
-	  setInterval(function(){
-	    if(state.currentX !== state.lastX || state.currentY !== state.lastY){
-	      state.lastX = state.currentX;
-	      state.lastY = state.currentY;
-
-	      var text = document.createTextNode(
-	        'Triggering event due to state change: x: ' + state.currentX + ', y: ' + state.currentY
-	      );
-	      outputEl.replaceChild( text, outputEl.firstChild );
-
-	      channel.trigger("client-mouse-moved", "my-event", {state:state});
-	    }
-	  }, 300); // send every 300 milliseconds if position has changed*/
 
 	document.onkeydown = KeyPress;
 	var rotate=0; // variable para rotar los objetos con shift+click
 	objetos = 0; // contados de objetos arrastrados al canvas (desde la paleta)
 
 	var i=0;
-
+	// stack undo
 	var stack = new Stack();
+	// stack redo
 	var stack2 = new Stack();
+	
 	var ini = [0,0];
 	var fin = [0,0];
 
+	// ctrl+z y ctrl+y para undo y redo
 	function KeyPress(e) {
 		var evtobj = window.event? event : e
 		if (evtobj.keyCode == 90 && evtobj.ctrlKey){
@@ -236,6 +213,9 @@ channel.bind('my-event', function(data) {
 	            	var pos=$(ui.helper).offset();
 	            	console.log("Final: ["+pos.left+", "+pos.top+"]");
             	 	stack.push([$(this).attr("id"), pos.left, pos.top, ini[0], ini[1]]);
+            	 	 $.post( "/graph", data , function( data ) {
+
+   			 		});
 	            }
 	        });
 	        //objeto desaparece cuando aplasto rueda del mouse
