@@ -96,7 +96,7 @@ channel.bind('my-event', function(data) {
 	var i=0;
 
 	var stack = new Stack();
-	var queue = new Queue();
+	var stack2 = new Stack();
 	var ini = [0,0];
 	var fin = [0,0];
 
@@ -109,27 +109,27 @@ channel.bind('my-event', function(data) {
 
 			if(undo[1] == "in"){
 				$(id).fadeOut();
-				queue.enqueue(undo);
+				stack2.push(undo);
 			}
 			else if(undo[1] == "out"){
 				$(id).fadeIn();
-				queue.enqueue(undo);
+				stack2.push(undo);
 			}
 			else if(undo[1] == "rot"){
 				rotate -= 90;
 				$(id).rotate(rotate);
-				queue.enqueue(undo);
+				stack2.push(undo);
 			}
 			else{
 				var left = undo[3];
 				var top = undo[4];
 				$('#'+id).css({top: top+'px', left: left+'px'});
-				queue.enqueue(undo);
+				stack2.push(undo);
 			}
 		}
 		if (evtobj.keyCode == 89 && evtobj.ctrlKey){
 
-			redo = queue.dequeue();
+			redo = stack2.pop();
 			var id = redo[0];
 
 			if(redo[1] == "out"){
@@ -149,7 +149,7 @@ channel.bind('my-event', function(data) {
 				var left = redo[1];
 				var top = redo[2];
 				$('#'+id).css({top: top+'px', left: left+'px'});
-				stack.push(undo);
+				stack.push(redo);
 			}
 		}
 	}
@@ -220,6 +220,7 @@ channel.bind('my-event', function(data) {
 	    	console.log(nombre);
 	    	$(nombre).css({"left":pos.left,"top":pos.top});
 	    	$(nombre).removeClass("drag");
+	    	// accion de ingresar un objeto de la paleta al canvas (stack push)
 	    	stack.push([nombre, "in"]);
 	       	//cuando objeto se arrastra
 	        $(nombre).draggable({
@@ -228,13 +229,13 @@ channel.bind('my-event', function(data) {
 		        	var pos=$(ui.helper).offset();
 		        	console.log($(this).attr("id"));
 		        	ini = [pos.left, pos.top];
-		           	console.log(ini);
+		           	console.log("Initial: ["+ini[0]+", "+ini[1]+"]");
 	        	},
 	            stop:function(ev, ui) { // termino de hacer drag
 	            	var outputEl = document.getElementById('client_event_example_log');
 	            	var pos=$(ui.helper).offset();
-	            	console.log($(this).attr("id")+" "+pos.left+" "+pos.top+" "+ini[0]+" "+ini[1]);
-	            	 stack.push([$(this).attr("id"), pos.left, pos.top, ini[0], ini[1]]);
+	            	console.log("Final: ["+pos.left+", "+pos.top+"]");
+            	 	stack.push([$(this).attr("id"), pos.left, pos.top, ini[0], ini[1]]);
 	            }
 	        });
 	        //objeto desaparece cuando aplasto rueda del mouse
@@ -245,6 +246,7 @@ channel.bind('my-event', function(data) {
 			    	rotate += 90;
 			        $(this).rotate(rotate);
     		        var nombre = "#"+$(this).attr("id");
+    		        // accion de rotar un objeto (stack push)
       				stack.push([nombre, "rot"]);
 			    } 
 			});
@@ -252,6 +254,7 @@ channel.bind('my-event', function(data) {
 		       	if( e.button == 1 ) { 
 		      		$(this).fadeOut();
 		      		var nombre = "#"+$(this).attr("id");
+		      		// accion de ocultar un objeto (stack push)
 		      		stack.push([nombre, "out"]);
 		      		return false; 
 		    	} 
@@ -290,13 +293,14 @@ channel.bind('my-event', function(data) {
 	    start:function(ev, ui){ // comienza el drag
         	var pos=$(ui.helper).offset();
         	ini = [pos.left, pos.top];
-        	console.log(ini);
+        	console.log("Initial: ["+ini[0]+", "+ini[1]+"]");
         	
             
 	    },
         stop:function(ev, ui) { // termina el drag
         	var pos=$(ui.helper).offset();
-        	console.log($(this).attr("id")+" "+pos.left+" "+pos.top+" "+ini[0]+" "+ini[1]);
+        	console.log("Final: ["+pos.left+", "+pos.top+"]");
+        	// accion de mover un objeto del canvas (stack push)
         	stack.push([$(this).attr("id"), pos.left, pos.top, ini[0], ini[1]]);
         }
 	});
@@ -312,6 +316,7 @@ channel.bind('my-event', function(data) {
 		    	rotate += 90;
 		        $(this).rotate(rotate);
 		        var nombre = "#"+$(this).attr("id");
+		        // accion de rotar un objeto (stack push)
       			stack.push([nombre, "rot"]);
 		    } 
 		});
@@ -319,6 +324,7 @@ channel.bind('my-event', function(data) {
        	if( e.button == 1 ) { 
       		$(this).fadeOut();
       		var nombre = "#"+$(this).attr("id");
+      		// accion de ocultar un objeto (stack push)
       		stack.push([nombre, "out"]);
       		return false; 
     	} 
